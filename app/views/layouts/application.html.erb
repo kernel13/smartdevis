@@ -1,14 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Smartdevis</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
 
-<%= yield %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">	
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+		<title>Smart Devis</title>	
+
+		<meta name="author" content=""/>
+		<meta name="title" content=""/>
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="revisit-after" content="7 DAYS" />
+		<meta name="language" content="FR" />
+		<meta name="robots" content="index, follow, All" /> 
+			
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="Css/style.css" />
+		
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		
+
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+	  	<%= javascript_include_tag "application" %>
+	  	<%= csrf_meta_tags %>
+		
+    </head>	
+		
+    <body>	ß	
+			 <!-- #HEADER -->	 
+			<div id="header">					
+				<div id="titre">																					
+					<%= content_for?(:title) ? yield(:title) : "<h1>SmartDevis, enfin un logiciel de Facturation adaptée...</h1>".html_safe %>
+				</div>											
+			</div>
+			 <!-- #MIDDLE -->
+			<div id="contenu">
+				<div style="display: inline-block">
+						<h3>
+						<% if account_signed_in? %>					
+						  <%= current_account.company.name %>| <%= link_to('Logout', destroy_account_session_path, :method => :delete) %>        
+						 <% end %>
+						</h3>
+				</div>
+					<div id="page">										
+						<%= yield %>
+					</div><!-- Page -->
+			</div><!-- MIDDLE -->	
+			<div id="footer"></div>	<!-- #FOOTER -->
 </body>
 </html>

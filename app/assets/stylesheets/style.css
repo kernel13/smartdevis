@@ -1,0 +1,203 @@
+@charset "iso-8859-15";
+
+html, body {
+	background-color: #212121;
+	background-image:url(repeat.png);
+	background-repeat: repeat-x ;
+	background-position:0px 0px; 
+
+	margin:0px auto; 
+	padding:0px; 
+	margin-top:-10px;
+	font-size: 14px;
+}
+img {
+	border:none;
+}
+
+A:hover { 
+	color:#212121;	
+	text-decoration:none; 
+
+} 
+A { 
+	text-decoration:none; 
+	color:#003663;
+} 
+/* --------------------------------------------------------- ENTETE ---------------------------------------------------------*/
+
+			
+	#header{
+				
+		top: 0px;
+		margin : 0 auto;
+		
+		height:193px;	
+		width:1060px;		
+				
+		background-image:url(header.png);
+		background-position:center; 
+
+		font-family:Times New Roman,Georgia,Serif;
+		
+		text-align:center;
+		color: #000000;		
+		z-index: 0;
+	}
+	
+		#titre{
+			position: relative;
+			top:150px;	
+			margin: 0 auto;			
+			vertical-align:top;
+		}
+		
+		
+		#menu{
+			position: relative;
+			top:20px;	
+			width: 900px;	
+			height: 500px;	
+							
+			margin: 0 auto;							
+			
+			text-align:center;			
+			font-size: 13pt;
+			z-index:1;
+			
+			border-radius: 20px;
+			box-shadow: 0px 8px 12px #808080;
+			
+			/*-moz-box-shadow: 0 0 5px 5px #808080;
+			-webkit-box-shadow: 0 0 5px 5px#808080;
+			box-shadow: 0 0 5px 5px #808080;*/
+			
+			color:	#003663;
+			
+			font-size: 1.2em ;			
+			
+		}
+		
+			/*Largeur des cellules pour le menu */
+			.Tab_menu{
+				width:100%;				
+				margin: 0 auto;	
+			}	
+			/*Largeur des cellules pour le menu */
+			.Td_menu{
+				width:300px;
+				height: 250px;
+				text-align:center;
+				vertical-align:middle;
+			}		
+ 
+
+
+	#contenu{
+		position: relative;
+		background-color: #ffffff;
+		min-height:500px;
+		
+		width:1024px;
+		top: 0px;
+		
+		margin : 0 auto;
+		
+		text-align:center;
+		color: #333;	
+		
+		z-index: 0;
+	}	
+	
+	#diapo {
+			position : relative;
+			height : 250px;
+			margin: 0 auto;			
+	}	
+
+	.roundimg{
+		
+		box-shadow: 8px 8px 12px #808080;
+		border: 1px solid #003663; 
+	}
+	#contact{
+				
+		width:400px;
+		margin : 0 auto;
+		background-image:url(cement.png);
+		background-position:center; 
+		padding:10px;
+		/*border-radius: 20px;*/
+		border: 1px solid #003663; 
+		box-shadow: 8px 8px 12px #808080;
+		
+		text-align:left;
+		font-size:0.9em;
+		color:	#404040;	
+		z-index: 1;
+	}
+	
+	#page{
+		width:900px;
+		margin : 0 auto;
+	}
+	
+
+	#footer{
+		position: relative;
+		height:66px;	
+		width:1060px;
+		margin : 0 auto;
+		
+				
+		background-image:url(footer.png);
+		background-position:center; 		
+				
+		text-align:center;
+		color: #000000;		
+		z-index: 0;
+	}	
+
+
+	
+.bleu
+{
+ color:	#003663;
+}
+.bleub
+{
+ color:	#003663;
+ font-weight:bold;
+ font-size: 1.2em ;
+}
+.rouge
+{
+ color:	#ff0000;
+}
+.stylegris
+{
+ color:	#404040;
+}
+
+h1
+{
+	font-size: 1.2em ;
+	color:	#003663;
+	text-shadow: 3px 3px 3px #808080;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+
+/* Styles affectees aux lettres, ou tableau */
+#k3dCarousel{
+	position: relative;	
+	width:100%;
+	height:180px;
+	margin : 0 auto;
+}
+div#k3dCarousel  img{
+		box-shadow: 8px 8px 12px #212121;
+		border-radius: 10px; 
+}
+

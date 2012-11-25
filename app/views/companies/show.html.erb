@@ -1,0 +1,52 @@
+<% content_for :title do %>
+	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Siret:</b>
+  <%= @company.siret %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @company.name %>
+</p>
+
+<p>
+  <b>Logo:</b>
+  <%= @company.logo %>
+</p>
+
+<div class="address">
+	<b>Address ligne 1: </b>
+	<%= @company.address.address_line1 %>
+	<br />
+	<b>Address ligne 2: </b>
+	<%= @company.address.address_line2 %>
+	<br />
+	<b>Ville: </b>
+	<%= @company.address.city %>
+	<br />
+	<b>Code postal</b>
+	<%= @company.address.postal_code %>
+	<br />
+	<b>E-Mail: </b>
+	<%= @company.address.email %>
+	<br />
+	<b>Telephone: </b>
+	<%= @company.address.phone %>	
+</div>
+
+<div class="comptes">
+<ul>
+<% @company.accounts.each do |account| %>
+		<li><%= account.email %></li>
+<% end %>
+</ul>
+</div>
+<br />
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

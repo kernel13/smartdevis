@@ -8,6 +8,26 @@ gem 'rails', '3.2.8'
 gem 'sqlite3'
 
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'  
+end
+ 
+group :test do
+  gem 'rspec'
+  gem 'growl'
+  gem 'rb-fsevent'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'guard'
+  gem 'guard-rspec'
+  
+  # Integration test
+  gem 'capybara'
+  gem 'launchy'
+end
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -22,6 +42,9 @@ end
 
 gem 'jquery-rails'
 
+gem 'activeadmin'
+gem 'nested_form'
+gem 'carrierwave'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
