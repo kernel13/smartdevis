@@ -41,6 +41,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'fog'
 end
 
 gem 'jquery-rails'
