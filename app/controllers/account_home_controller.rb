@@ -3,6 +3,5 @@ class AccountHomeController < ApplicationController
    
     def index
         @company = current_account.company
-        logger.info "================= " + @company.name
     end
 end

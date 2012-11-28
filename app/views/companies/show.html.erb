@@ -11,33 +11,15 @@
 
 <p>
   <b>Name:</b>
-  <%= @company.name %>
+  <%= @company.company_name %>
 </p>
 
 <p>
   <b>Logo:</b>
-  <%= @company.logo %>
+  <%= image_tag @company.logo_url.to_s if @company.logo_url %>	
 </p>
 
-<div class="address">
-	<b>Address ligne 1: </b>
-	<%= @company.address.address_line1 %>
-	<br />
-	<b>Address ligne 2: </b>
-	<%= @company.address.address_line2 %>
-	<br />
-	<b>Ville: </b>
-	<%= @company.address.city %>
-	<br />
-	<b>Code postal</b>
-	<%= @company.address.postal_code %>
-	<br />
-	<b>E-Mail: </b>
-	<%= @company.address.email %>
-	<br />
-	<b>Telephone: </b>
-	<%= @company.address.phone %>	
-</div>
+<%= render "/addresses/address", :address => @company %>
 
 <div class="comptes">
 <ul>

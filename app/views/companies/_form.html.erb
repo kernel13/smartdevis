@@ -15,17 +15,19 @@
     <%= f.label :siret %><br />
     <%= f.number_field :siret %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="field">	
+    <%= f.label :company_name %><br />
+    <%= f.text_field :company_name %>
   </div>
   <div class="field">
+	
+	<%= f.check_box :remove_logo %> Delete logo
     <%= f.label :logo %><br />
     <%= f.file_field :logo %>
   </div>
 
   <%= f.fields_for :address, @company.address do |address_form| %>
-	<%= render 'address_fields', :f => address_form %>
+	<%= render '/addresses/address_fields', :f => address_form %>
   <% end %>
 
   <%= f.fields_for :accounts %>

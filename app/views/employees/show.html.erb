@@ -1,0 +1,24 @@
+<% content_for :title do %>
+	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Last name:</b>
+  <%= @employee.last_name %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @employee.first_name %>
+</p>
+
+<p>
+  <b>Day price:</b>
+  <%= @employee.day_price %>
+</p>
+
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

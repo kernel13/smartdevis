@@ -1,4 +1,8 @@
 Smartdevis::Application.routes.draw do
+  resources :customers
+
+  resources :employees
+
   devise_for :accounts
 
   ActiveAdmin.routes(self)

@@ -31,16 +31,17 @@ class CompaniesController < ApplicationController
    # def new
    #      current_account.company = Company.new
    #      current_account.company.build
+   #      current_account.company.address.build
    #       
    #       respond_to do |format|
    #         format.html # new.html.erb
    #         format.json { render json: @company }
    #       end
    #     end
-
+  
   # GET /companies/1/edit
   def edit
-    @company = Company.find(params[:id])
+    @company = current_account.company #Company.find(params[:id])
   end
 
   # POST /companies
@@ -62,7 +63,7 @@ class CompaniesController < ApplicationController
   # PUT /companies/1
   # PUT /companies/1.json
   def update
-    @company = Company.find(params[:id])
+    @company = current_account.company #Company.find(params[:id])
 
     respond_to do |format|
       if @company.update_attributes(params[:company])

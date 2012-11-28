@@ -1,0 +1,20 @@
+<% content_for :title do %>
+	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Last name:</b>
+  <%= @customer.last_name %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @customer.first_name %>
+</p>
+
+<%= render "/addresses/address", :address => @customer %>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>
