@@ -44,7 +44,6 @@ group :production do
 end
 
 gem 'jquery-rails'
-
 gem 'activeadmin'
 gem 'nested_form'
 gem 'mini_magick'
