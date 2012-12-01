@@ -1,7 +1,7 @@
 <table> 
 	<tr>	
 		<td>
-		    <%= f.label :email %><br />
+		    <%= f.label :email, t('.email') %><br />
 		    <%= f.text_field :email %>
 		 </td>
 		 <td>
@@ -13,7 +13,7 @@
 		    <%= f.text_field :password_confirmation %>
 		  </td>
 		<td>
-			<%= f.link_to_remove "Delete"  %>
+			<%= f.link_to_remove t('destroy')  %>
 		</td>
 	</tr>
 </table>

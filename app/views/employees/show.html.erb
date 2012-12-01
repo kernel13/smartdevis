@@ -5,20 +5,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Last name:</b>
+  <b><%= t('.last_name') %></b>
   <%= @employee.last_name %>
 </p>
 
 <p>
-  <b>First name:</b>
+  <b><%= t('.first_name') %></b>
   <%= @employee.first_name %>
 </p>
 
 <p>
-  <b>Day price:</b>
+  <b><%= t('.day_price') %></b>
   <%= @employee.day_price %>
 </p>
 
 
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+<%= link_to t('edit'), edit_employee_path(@employee) %> |
+<%= link_to t('back'), employees_path %>

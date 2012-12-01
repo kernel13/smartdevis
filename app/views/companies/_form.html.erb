@@ -21,7 +21,7 @@
   </div>
   <div class="field">
 	
-	<%= f.check_box :remove_logo %> Delete logo
+	<%= f.check_box :remove_logo %> <%= f.label :remove_logo %><br />
     <%= f.label :logo %><br />
     <%= f.file_field :logo %>
   </div>
@@ -31,7 +31,7 @@
   <% end %>
 
   <%= f.fields_for :accounts %>
-  <p><%= f.link_to_add "Add an account", :accounts %></p>
+  <p><%= f.link_to_add t('.add_an_account'), :accounts %></p>
 
   <div class="actions">
     <%= f.submit %>

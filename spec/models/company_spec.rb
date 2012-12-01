@@ -11,7 +11,7 @@ describe Company do
     end
     
     it "should fail with no name" do
-       @company.should have_at_least(1).error_on(:name)
+       @company.should have_at_least(1).error_on(:company_name)
     end
         
     describe "siret" do         
@@ -21,7 +21,7 @@ describe Company do
       
       it "should fail with siret length less than 14" do      
          @company.siret = "1"
-         @company.errors_on(:siret).should include("is the wrong length (should be 14 characters)")
+         @company.errors_on(:siret).should include("longueur invalide (devrait etre de 14 caracteres)")
       end
     end
   end
@@ -38,10 +38,10 @@ describe Company do
      end     
   end
   
-  describe "with account" do
-     it "should have an address" do
-        company = Company.new
-        company.errors_on(:account).should include("account missing")
-     end
-  end
+  # describe "with account" do
+  #      it "should have an address" do
+  #         company = Company.new
+  #         company.errors_on(:account).should include("account missing")
+  #      end
+  #   end
 end

@@ -1,6 +1,8 @@
 Smartdevis::Application.routes.draw do
-  resources :customers
 
+  match "customers/:letter", :to => "customers#index", :constraints => { :letter => /[a-zA-Z]/ }
+  resources :customers
+  
   resources :employees
 
   devise_for :accounts
@@ -13,6 +15,7 @@ Smartdevis::Application.routes.draw do
   resources :account_home
  
   root :to => "account_home#index"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

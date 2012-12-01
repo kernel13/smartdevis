@@ -5,17 +5,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Siret:</b>
+  <b><%= t('.siret')%></b>
   <%= @company.siret %>
 </p>
 
 <p>
-  <b>Name:</b>
+  <b><%= t('.company_name')%></b>
   <%= @company.company_name %>
 </p>
 
 <p>
-  <b>Logo:</b>
+  <b><%= t('.logo')%></b>
   <%= image_tag @company.logo_url.to_s if @company.logo_url %>	
 </p>
 
@@ -30,5 +30,5 @@
 </div>
 <br />
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to t('edit'), edit_company_path(@company) %> |
+<%= link_to t('back'), companies_path %>

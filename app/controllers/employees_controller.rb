@@ -15,7 +15,7 @@ class EmployeesController < ApplicationController
    # GET /employees/1
    # GET /employees/1.json
    def show
-     @employee = Employee.find(params[:id])
+     @employee = current_account.company.employees.find(params[:id])
 
      respond_to do |format|
        format.html # show.html.erb
@@ -60,7 +60,7 @@ class EmployeesController < ApplicationController
    # PUT /employees/1
    # PUT /employees/1.json
    def update
-     @employee = Employee.find(params[:id])
+     @employee = current_account.company.employees.find(params[:id])
 
      respond_to do |format|
        if @employee.update_attributes(params[:employee])
@@ -76,7 +76,7 @@ class EmployeesController < ApplicationController
    # DELETE /employees/1
    # DELETE /employees/1.json
    def destroy
-         @employee = Employee.find(params[:id])
+         @employee = current_account.company.employees.find(params[:id])
          @employee.destroy
      
          respond_to do |format|

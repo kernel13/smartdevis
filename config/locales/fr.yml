@@ -1,0 +1,97 @@
+
+fr:
+    show: "Afficher"
+    back: "Retour"
+    edit: "Editer"
+    destroy: "Supprimer"
+    helpers:
+        submit:
+            create: "Créer"
+            update: "Sauvergarder"
+        file_field: 
+            button: "Choisir un fichier"
+        
+    time:
+        formats:
+            long: "%Y-%m-%d %H:%M:%S"
+    activerecord:
+        errors:
+            models:
+                address:
+                    attributes:
+                        postal_code:
+                            not_a_number: "N'est pas un nombre"
+                company:
+                    attributes:
+                         siret:
+                            wrong_length: "longueur invalide (devrait etre de 14 caracteres)"
+        attributes:
+            company:
+               company_name: "Nom"   
+               siret: "siret"            
+               logo: "image"
+               add_an_account: "Ajouter un compte"        
+               update_company: "Mettre à jour"   
+               remove_logo: "Supprimer l'image"  
+               submit: "sauvegarder"
+            account:
+               email: "EMail"
+               password: "Mot de passe"
+               password_confirmation: "Confirmation du mot de passe"            
+               delete: "Supprimer"
+            address:
+                address_line1: "Addresse ligne 1"
+                address_line2: "Adresse ligne 2"
+                city: "Ville"
+                postal_code: "code postal"
+                email: "E-Mail"
+                phone: "Téléphone"
+            employee:
+                last_name: "Nom"
+                first_name: "Prénom"
+                day_price: "Prix à la journée"
+            customer:
+                last_name: "Nom"
+                first_name: "Prénom"
+    companies:
+        form:
+            add_an_account: "Ajouter un compte"
+        edit:
+            edit_company: "Modifier la société"
+        show:
+            company_name: "Nom"   
+            siret: "siret"            
+            logo: "image" 
+    addresses:
+        address:
+            address_line1: "Address ligne 1"
+            address_line2: "Address ligne 2"
+            city: "Vile"
+            postal_code: "code postal"
+            email: "EMail"
+            phone: "Téléphone"
+    employees:
+        edit:
+            edit_employee: "Modifier l'employée"
+        show:
+            last_name: "Nom"
+            first_name: "Prénom"
+            day_price: "Prix à la journée"
+        index:
+            last_name: "Nom"
+            first_name: "Prénom"
+            day_price: "Prix à la journée"
+            list_employees: "Afficher les employées"
+            new_employee: "Nouvel employée"
+    customers:
+        edit:
+            edit_customer: "Modifier un client"
+        index:
+            last_name: "Nom"
+            first_name: "Prénom"
+            list_customers: "Fichiers clients"
+        show:
+            last_name: "Nom"
+            first_name: "Prénom"
+                            
+            

@@ -24,7 +24,10 @@ describe CustomersController do
   # Customer. As you add validations to Customer, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :first_name => "firstname",
+      :last_name => "lastname"
+    }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,34 +37,36 @@ describe CustomersController do
     {}
   end
 
+  before(:each) do
+      @customer = create(:customer)
+      sign_in @customer.company.accounts.first
+  end
+
   describe "GET index" do
     it "assigns all customers as @customers" do
-      customer = Customer.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:customers).should eq([customer])
+      get :index
+      assigns(:customers).should eq([@customer])
     end
   end
 
   describe "GET show" do
     it "assigns the requested customer as @customer" do
-      customer = Customer.create! valid_attributes
-      get :show, {:id => customer.to_param}, valid_session
-      assigns(:customer).should eq(customer)
+      get :show, {:id => @customer.to_param}
+      assigns(:customer).should eq(@customer)
     end
   end
 
   describe "GET new" do
     it "assigns a new customer as @customer" do
-      get :new, {}, valid_session
+      get :new
       assigns(:customer).should be_a_new(Customer)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested customer as @customer" do
-      customer = Customer.create! valid_attributes
-      get :edit, {:id => customer.to_param}, valid_session
-      assigns(:customer).should eq(customer)
+    it "assigns the requested customer as @customer" do     
+      get :edit, {:id => @customer.to_param}
+      assigns(:customer).should eq(@customer)
     end
   end
 
@@ -69,18 +74,18 @@ describe CustomersController do
     describe "with valid params" do
       it "creates a new Customer" do
         expect {
-          post :create, {:customer => valid_attributes}, valid_session
+          post :create, {:customer => valid_attributes}
         }.to change(Customer, :count).by(1)
       end
 
       it "assigns a newly created customer as @customer" do
-        post :create, {:customer => valid_attributes}, valid_session
+        post :create, {:customer => valid_attributes}
         assigns(:customer).should be_a(Customer)
         assigns(:customer).should be_persisted
       end
 
       it "redirects to the created customer" do
-        post :create, {:customer => valid_attributes}, valid_session
+        post :create, {:customer => valid_attributes}
         response.should redirect_to(Customer.last)
       end
     end
@@ -89,14 +94,14 @@ describe CustomersController do
       it "assigns a newly created but unsaved customer as @customer" do
         # Trigger the behavior that occurs when invalid params are submitted
         Customer.any_instance.stub(:save).and_return(false)
-        post :create, {:customer => {}}, valid_session
+        post :create, {:customer => {}}
         assigns(:customer).should be_a_new(Customer)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Customer.any_instance.stub(:save).and_return(false)
-        post :create, {:customer => {}}, valid_session
+        post :create, {:customer => {}}
         response.should render_template("new")
       end
     end
@@ -111,36 +116,32 @@ describe CustomersController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Customer.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => customer.to_param, :customer => {'these' => 'params'}}, valid_session
+        put :update, {:id => @customer.to_param, :customer => {'these' => 'params'}}
       end
 
       it "assigns the requested customer as @customer" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => valid_attributes}, valid_session
-        assigns(:customer).should eq(customer)
+        put :update, {:id => @customer.to_param, :customer => valid_attributes}
+        assigns(:customer).should eq(@customer)
       end
 
       it "redirects to the customer" do
-        customer = Customer.create! valid_attributes
-        put :update, {:id => customer.to_param, :customer => valid_attributes}, valid_session
-        response.should redirect_to(customer)
+        put :update, {:id => @customer.to_param, :customer => valid_attributes}
+        response.should redirect_to(@customer)
       end
     end
 
     describe "with invalid params" do
       it "assigns the customer as @customer" do
-        customer = Customer.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Customer.any_instance.stub(:save).and_return(false)
-        put :update, {:id => customer.to_param, :customer => {}}, valid_session
-        assigns(:customer).should eq(customer)
+        put :update, {:id => @customer.to_param, :customer => {}}
+        assigns(:customer).should eq(@customer)
       end
 
       it "re-renders the 'edit' template" do
-        customer = Customer.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Customer.any_instance.stub(:save).and_return(false)
-        put :update, {:id => customer.to_param, :customer => {}}, valid_session
+        put :update, {:id => @customer.to_param, :customer => {}}
         response.should render_template("edit")
       end
     end
@@ -148,15 +149,13 @@ describe CustomersController do
 
   describe "DELETE destroy" do
     it "destroys the requested customer" do
-      customer = Customer.create! valid_attributes
       expect {
-        delete :destroy, {:id => customer.to_param}, valid_session
+        delete :destroy, {:id => @customer.to_param}
       }.to change(Customer, :count).by(-1)
     end
 
     it "redirects to the customers list" do
-      customer = Customer.create! valid_attributes
-      delete :destroy, {:id => customer.to_param}, valid_session
+      delete :destroy, {:id => @customer.to_param}
       response.should redirect_to(customers_url)
     end
   end

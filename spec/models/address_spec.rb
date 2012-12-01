@@ -20,7 +20,7 @@ describe Address do
     
      it "should have one error on postal code if not a number" do
          invalid_address = Address.new(:address_line1 => "line", :city => "city", :postal_code => "a")
-         invalid_address.errors_on(:postal_code).should include("is not a number")
+         invalid_address.errors_on(:postal_code).should include("N'est pas un nombre")
      end
    end
 end

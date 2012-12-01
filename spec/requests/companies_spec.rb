@@ -17,7 +17,7 @@ describe "Companies" do
           
           click_on "Sign in"
           
-          page.body.should have_content(@company.name)        
+          page.body.should have_content(@company.company_name)        
           
       end
   end

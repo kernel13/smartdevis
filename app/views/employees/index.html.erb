@@ -2,13 +2,13 @@
 	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
 <% end %>
 
-<h1>Listing employees</h1>
+<h1><%= t('.list_employees')%></h1>
 
 <table>
   <tr>
-    <th>Last name</th>
-    <th>First name</th>
-    <th>Day price</th>
+    <th><%= t('.last_name') %></th>
+    <th><%= t('.first_name') %></th>
+    <th><%= t('.day_price') %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,13 +19,13 @@
     <td><%= employee.last_name %></td>
     <td><%= employee.first_name %></td>
     <td><%= employee.day_price %></td>
-    <td><%= link_to 'Show', employee %></td>
-    <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-    <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to t('show'), employee %></td>
+    <td><%= link_to t('edit'), edit_employee_path(employee) %></td>
+    <td><%= link_to t('destroy'), employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Employee', new_employee_path %>
+<%= link_to  t('.new_employee'), new_employee_path %>

@@ -4,10 +4,15 @@ class CustomersController < ApplicationController
    # GET /customers
    # GET /customers.json
    def index
-     @customers = current_account.company.customers
-    
+     if(params[:letter])
+        @customers = current_account.company.customers.where("last_name like ?", "#{params[:letter]}%")
+     else
+       @customers = current_account.company.customers
+     end
+          
       respond_to do |format|
           format.html # index.html.erb
+          format.js
           format.json { render json: @companies }
         end
    end
@@ -15,10 +20,11 @@ class CustomersController < ApplicationController
    # GET /customers/1
    # GET /customers/1.json
    def show
-     @customer = Customer.find(params[:id])
+     @customer = current_account.company.customers.find(params[:id])
 
      respond_to do |format|
        format.html # show.html.erb
+       format.js
        format.json { render json: @customer }
      end
    end
@@ -39,6 +45,7 @@ class CustomersController < ApplicationController
    # GET /customers/1/edit
    def edit
      @customer = current_account.company.customers.find(params[:id])
+     @customer.address = Address.new unless @customer.address
    end
 
    # POST /customers
@@ -61,7 +68,7 @@ class CustomersController < ApplicationController
    # PUT /customers/1
    # PUT /customers/1.json
    def update
-     @customer = Customer.find(params[:id])
+     @customer = current_account.company.customers.find(params[:id])
 
      respond_to do |format|
        if @customer.update_attributes(params[:customer])
@@ -77,7 +84,7 @@ class CustomersController < ApplicationController
    # DELETE /customers/1
    # DELETE /customers/1.json
    def destroy
-         @customer = Customer.find(params[:id])
+         @customer = current_account.company.customers.find(params[:id])
          @customer.destroy
      
          respond_to do |format|

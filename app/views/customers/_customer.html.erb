@@ -1,0 +1,10 @@
+<div style="display: inline-block; height: 150px; border: 2px outset black; padding: 10px; margin: 5px; ">
+	<p><%= t('.last_name') %> <%= customer.last_name %></p>
+	<p><%= t('.first_name') %> <%= customer.first_name %></p>
+	
+	<P><%# render "/addresses/address", :address => customer if customer.address %></p>
+
+	<p><%= link_to t('show'), customer, :remote => true %>
+	<%= link_to t('edit'), edit_customer_path(customer) %>
+	<%= link_to t('destroy'), customer, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+</div>

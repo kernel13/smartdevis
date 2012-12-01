@@ -2,8 +2,10 @@
 
 FactoryGirl.define do
   factory :employee do
-    last_name "MyString"
-    first_name "MyString"
+    last_name "lastname"
+    first_name "firstname"
     day_price "9.99"
+    
+    company
   end
 end

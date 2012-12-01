@@ -3,7 +3,7 @@ class Address < ActiveRecord::Base
   
   attr_accessible :address_line1, :address_line2, :city, :email, :phone, :postal_code
   
-  validates :address_line1, :presence => true
-  validates :city, :presence => true
-  validates :postal_code, :presence => true, :numericality => true
+  #validates :address_line1, :presence => true
+  #validates :city, :presence => true
+  #validates :postal_code, :presence => true, :numericality => true
 end
