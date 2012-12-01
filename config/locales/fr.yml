@@ -86,11 +86,11 @@ fr:
     customers:
         edit:
             edit_customer: "Modifier un client"
-        index:
+        customer:
             last_name: "Nom"
             first_name: "Prénom"
             list_customers: "Fichiers clients"
-        show:
+        show_customer:
             last_name: "Nom"
             first_name: "Prénom"
                             
