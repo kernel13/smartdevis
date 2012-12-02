@@ -2,14 +2,14 @@
 	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
 <% end %>
 
-<h1>Listing materials</h1>
+<h1><%= t('.list_materials') %></h1>
 
 <div id="materials">
 <table>
   <tr>
-    <th>Name</th>
-    <th>Unit pricetf</th>
-	<th>Category</th>
+    <th><%= t('.name') %></th>
+    <th><%= t('.unit_pricetf') %></th>
+	<th><%= t('.category') %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -20,15 +20,15 @@
     <td><%= material.name %></td>
     <td><%= material.unit_priceTF %></td>
     <td><%= material.category.name if material.category %></td>
-    <td><%= link_to 'Show', material %></td>
-    <td><%= link_to 'Edit', edit_material_path(material) %></td>
-    <td><%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to t('show'), material %></td>
+    <td><%= link_to t('edit'), edit_material_path(material) %></td>
+    <td><%= link_to t('destroy'), material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-<%= link_to 'New Material', new_material_path %>
+<%= link_to t('.new_material'), new_material_path %>
 
 </div>
 <div id="categories">

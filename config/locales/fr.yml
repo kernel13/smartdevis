@@ -7,10 +7,7 @@ fr:
     helpers:
         submit:
             create: "Créer"
-            update: "Sauvergarder"
-        file_field: 
-            button: "Choisir un fichier"
-        
+            update: "Sauvergarder"        
     time:
         formats:
             long: "%Y-%m-%d %H:%M:%S"
@@ -53,6 +50,13 @@ fr:
             customer:
                 last_name: "Nom"
                 first_name: "Prénom"
+            category:
+                name: "Nom"
+                parent: "Parent"
+            material:
+                name: "Nom"
+                unit_priceTF: "Prix Unitaire HT"
+                category: "Categorie"
     companies:
         form:
             add_an_account: "Ajouter un compte"
@@ -93,5 +97,19 @@ fr:
         show_customer:
             last_name: "Nom"
             first_name: "Prénom"
-                            
-            
+    materials:
+        index:
+            list_materials: "Matériaux"
+            name: "Nom"
+            unit_pricetf: "Prix unitaire HT"
+            category: "Categorie"
+            new_material: "Nouveau matériel"
+    categories:
+        index:
+            name: "Nom"
+            parent: "Parent" 
+            new_category: "Nouvelle Categorie"  
+        new:             
+            new_category: "Nouvelle categorie"
+        edit:
+            edit_category: "Editer Categorie"
