@@ -1,0 +1,23 @@
+// Place all the styles related to the Categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul.category_tree{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+	
+	li{
+		width: 100px;
+		margin: 0;
+		padding: 0;
+	}
+}
+ul.category_tree .node
+{	
+	list-style-image: url('folder_black.png');
+}
+
+ul.category_tree .leaf{
+		list-style-image: none;
+}

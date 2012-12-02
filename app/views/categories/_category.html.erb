@@ -1,0 +1,19 @@
+<% if category.sub_categories.count > 0 %>
+	<li class="node">	
+		<%= category.name %> - 
+			<%= link_to "N", new_category_path(:parent_id => category.id) %>
+			<%= link_to "E", edit_category_path(category) %>
+			<%= link_to "D", category, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<ul>
+			<%= render :partial => '/categories/category', :collection => category.sub_categories, :as => :category if category.sub_categories.count > 0 %>
+		</ul>
+	</li>		
+<% else %>
+	<li class="leaf">
+		<%= category.name %> -
+			<%= link_to "N", new_category_path(:parent_id => category.id) %>
+			<%= link_to "E", edit_category_path(category) %>
+			<%= link_to "D", category,  method: :delete, data: { confirm: 'Are you sure?' } %>
+	</li>
+<% end %>
+	

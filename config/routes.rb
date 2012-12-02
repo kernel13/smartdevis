@@ -1,5 +1,7 @@
 Smartdevis::Application.routes.draw do
 
+  resources :materials, :categories
+
   match "customers/:letter", :to => "customers#index", :constraints => { :letter => /[a-zA-Z]/ }
   resources :customers
   

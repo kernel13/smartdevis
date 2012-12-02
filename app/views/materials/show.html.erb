@@ -1,0 +1,19 @@
+<% content_for :title do %>
+	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @material.name %>
+</p>
+
+<p>
+  <b>Unit pricetf:</b>
+  <%= @material.unit_priceTF %>
+</p>
+
+
+<%= link_to 'Edit', edit_material_path(@material) %> |
+<%= link_to 'Back', materials_path %>
