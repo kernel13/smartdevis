@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202094241) do
+ActiveRecord::Schema.define(:version => 20121202201944) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -110,6 +110,16 @@ ActiveRecord::Schema.define(:version => 20121202094241) do
     t.integer  "company_id"
   end
 
+  create_table "items", :force => true do |t|
+    t.integer  "quantity"
+    t.decimal  "totalTF"
+    t.decimal  "tva"
+    t.integer  "material_id"
+    t.integer  "worksite_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "materials", :force => true do |t|
     t.string   "name"
     t.decimal  "unit_priceTF"
@@ -119,5 +129,14 @@ ActiveRecord::Schema.define(:version => 20121202094241) do
   end
 
   add_index "materials", ["category_id"], :name => "index_materials_on_category_id"
+
+  create_table "worksites", :force => true do |t|
+    t.string   "reason"
+    t.text     "description"
+    t.date     "work_start_on"
+    t.date     "work_end_on"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
 end

@@ -1,0 +1,29 @@
+<h1>Listing worksites</h1>
+
+<table>
+  <tr>
+    <th>Reason</th>
+    <th>Description</th>
+    <th>Work start on</th>
+    <th>Work end on</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @worksites.each do |worksite| %>
+  <tr>
+    <td><%= worksite.reason %></td>
+    <td><%= worksite.description %></td>
+    <td><%= worksite.work_start_on %></td>
+    <td><%= worksite.work_end_on %></td>
+    <td><%= link_to 'Show', worksite %></td>
+    <td><%= link_to 'Edit', edit_worksite_path(worksite) %></td>
+    <td><%= link_to 'Destroy', worksite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Worksite', new_worksite_path %>

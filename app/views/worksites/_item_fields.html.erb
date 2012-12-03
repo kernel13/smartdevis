@@ -1,0 +1,23 @@
+<table>
+	<tr>
+		<td>
+			<%# f.select :material_id, Material.all.collect {|m| [m.name, m.id] } %>
+			<%= f.label :material %><br />
+			<%= f.text_field :material, :id => "search_material" %>
+			<%= f.hidden_field :material_id %>
+		</td>
+		<td class="field">
+   			<%= f.label :quantity %><br />
+   			<%= f.text_field :quantity %>
+ 		</td>
+ 		<td class="field">	
+   			<%= f.label :totalTF %><br />
+   			<%= f.text_field :totalTF %>
+ 		</td>
+		<td class="field">	
+   			<%= f.label :tva %><br />
+   			<%= f.text_field :tva %>
+		</td>
+		<td><%= f.link_to_remove t('destroy')  %></td>
+	</tr>
+</table>

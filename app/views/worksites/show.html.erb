@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Reason:</b>
+  <%= @worksite.reason %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @worksite.description %>
+</p>
+
+<p>
+  <b>Work start on:</b>
+  <%= @worksite.work_start_on %>
+</p>
+
+<p>
+  <b>Work end on:</b>
+  <%= @worksite.work_end_on %>
+</p>
+
+
+<%= link_to 'Edit', edit_worksite_path(@worksite) %> |
+<%= link_to 'Back', worksites_path %>
