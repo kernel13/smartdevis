@@ -1,6 +1,8 @@
 Smartdevis::Application.routes.draw do
 
 
+  resources :estimates
+
   match "customers/:letter", :to => "customers#index", :constraints => { :letter => /[a-zA-Z]/ }
  
   resources :materials, :categories, :worksites,  :customers, :employees

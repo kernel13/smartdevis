@@ -2,9 +2,10 @@
 	<tr>
 		<td>
 			<%# f.select :material_id, Material.all.collect {|m| [m.name, m.id] } %>
-			<%= f.label :material %><br />
-			<%= f.text_field :material, :id => "search_material" %>
-			<%= f.hidden_field :material_id %>
+			<%= f.label :name %><br />
+			<%= f.text_field :name, :class => "material_label" %>
+			<%= f.hidden_field :material_id, :class => "material_value" %>
+			<%= f.hidden_field :worksite_id %>
 		</td>
 		<td class="field">
    			<%= f.label :quantity %><br />

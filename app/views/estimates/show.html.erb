@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Total:</b>
+  <%= @estimate.total %>
+</p>
+
+<p>
+  <b>Nb days:</b>
+  <%= @estimate.nb_days %>
+</p>
+
+
+<%= link_to 'Edit', edit_estimate_path(@estimate) %> |
+<%= link_to 'Back', estimates_path %>

@@ -12,12 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
+    <%= f.label :customer_name %><br />
+    <%= f.text_field :customer_name %>
   </div>
 
   <%= f.fields_for :address, @customer.address do |address_form| %>

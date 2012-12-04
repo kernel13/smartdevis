@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
    # GET /customers.json
    def index
      if(params[:letter])
-        @customers = current_account.company.customers.find(:all, :conditions => ["lower(last_name) like ?", "#{params[:letter].downcase}%"])
+        @customers = current_account.company.customers.find(:all, :conditions => ["lower(customer_name) like ?", "#{params[:letter].downcase}%"])
      else
        @customers = current_account.company.customers
      end

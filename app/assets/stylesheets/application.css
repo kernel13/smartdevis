@@ -10,3 +10,7 @@
  *= require_self
  *= require_tree .
  */
+
+.ui-autocomplete{
+	max-height: 100px; overflow-y: scroll; overflow-x: hidden;
+}
