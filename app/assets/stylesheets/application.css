@@ -11,6 +11,78 @@
  *= require_tree .
  */
 
+body{
+	padding-top: 30px;
+}
+
+#page {
+	background-color: #fff; 
+	padding-top: 10px; 
+	padding-bottom: 10px; 
+	margin: 40px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+#content{
+	min-height: 300px;
+}
+
+#footer{
+	
+}
+
 .ui-autocomplete{
 	max-height: 100px; overflow-y: scroll; overflow-x: hidden;
+}
+
+#new_account{
+	width: 500px; 
+	margin: 60px auto;	
+} 
+
+#headband{
+	color: #859bbb;
+	height: 30px;
+	background-color: rgba(12, 15, 18, 0.75);
+	padding-top: 5px;
+	padding-right: 20px;
+
+}
+
+
+#menu{
+	position: absolute;
+	top: 30px;
+	width: 700px;	
+	height: 400px;	
+
+	text-align:center;			
+	font-size: 13pt;
+	z-index:100;
+	
+	border: solid 1px #595754;
+	box-shadow: 0px 8px 10px #808080;			
+	background-color: rgba(89, 87, 84, 0.75);
+	display: none;
+	color:	white;
+	
+	font-size: 1.2em ;	
+	-webkit-border-bottom-left-radius: 12px;
+	-moz-border-bottom-left-radius: 12px;
+	border-bottom-left-radius: 12px;		
+}
+
+/*Largeur des cellules pour le menu */
+.Td_menu{
+	width:250px;
+	height: 200px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.toolbar{
+	margin-right: 70px;
 }

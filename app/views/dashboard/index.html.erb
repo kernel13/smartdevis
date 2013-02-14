@@ -1,0 +1,84 @@
+<% content_for :title do %>
+	<h1>Dashboard</h1>
+<% end %>
+<div class="container">
+	
+<div class="row">
+	<div class="span5 offset1">
+		<div class="row">
+			<div class="btn-group">
+		 		<button class="btn btn-primary" ><i class="icon-plus-sign"></i> Estimate</button>
+				<button class="btn btn-primary"><i class="icon-plus-sign"></i> Invoice</button>
+				<button class="btn btn-primary"><i class="icon-plus-sign"></i> customer</button>
+			</div>
+		</div>		
+		<div class="row">
+			<span class="label">Customers</span>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>Customer</td>
+						<td>Last update</td>
+					</tr>
+				</thead>
+				<tbody>
+			<% @latest_customers.each do |customer| %>
+				<tr>
+				<td><%= customer.customer_name %></td>
+				<td><%= customer.updated_at.strftime("%d %b %y %H:%M") %></td>
+				</tr>
+			<% end %>
+				</tbody>
+			</table>
+		
+	</div>
+	</div>
+	<div class="span4">	
+	<div class="row">
+		<div id="latest_estimate" class="span4">
+			<span class="label">Latest Estimates</span>
+			<span class="content">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td>Customer</td>
+							<td>Last update</td>
+							<td>total</td>
+						</tr>
+					</thead>
+					<tbody>
+				<% @latest_estmates.each do |estimate| %>
+					<tr>
+					<td><%= estimate.customer_name %></td>
+					<td><%= estimate.created_at.strftime("%d %b %y %H:%M") %></td>
+					<td><%= estimate.total %></td>
+					</tr>
+				<% end %>
+					</tbody>
+				</table>
+			</span>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="latest_estimate" class="span4">
+			<span class="label">Latest invoice</span>
+			<span class="content">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td>Customer</td>
+							<td>Last update</td>
+							<td>total</td>
+						</tr>
+					</thead>
+					<tbody>
+	
+					</tbody>
+				</table>
+			</span>
+		</div>
+	</div>
+	</div>
+</div>
+</div>

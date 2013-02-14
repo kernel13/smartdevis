@@ -1,0 +1,20 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#latest_estimate{
+	font-size: 0.8em;
+}
+
+#button_create_invoice{
+	width: 100px;
+	height: 40px;
+	background-color: #2067cc;
+	border: outset 2px #1e59d8;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-align: center;
+	padding-top: 20px;
+	margin: 20px;
+	color: white;
+}

@@ -1,2 +1,3 @@
-$("#customers").empty();
-$("#customers").append("<%=j render @customers %>")
+
+$("#customers").html("<%=j render @customers %>")
+$('#paginator').html('<%=j paginate(@customers, :remote => true).to_s %>');

@@ -10,6 +10,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'  
   gem 'sqlite3'
+  
+  gem 'better_errors'
+  #gem 'binding_of_caller'
+  gem 'meta_request'
 end
  
 group :test do
@@ -37,6 +41,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 end
 
 group :production do
@@ -49,6 +54,8 @@ gem 'activeadmin'
 gem 'nested_form'
 gem 'mini_magick'
 gem 'carrierwave'
+gem "kaminari"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

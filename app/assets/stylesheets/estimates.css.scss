@@ -1,3 +1,161 @@
 // Place all the styles related to the estimates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+fieldset {
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	width: 400px;
+}
+
+h1.title{
+   font-family: 'Raleway', Helvetica, Arial, sans-serif;
+   color: #08366f; 
+   font-weight: bold;
+   font-size: 40px; 
+   letter-spacing: 0.1em; 
+   line-height: 1.5em; 
+   text-transform: uppercase; 
+   margin: 10px;
+}
+
+/* COMPANY	*/
+#company_info{
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+
+#company_info h1{
+ 	font-family: 'Goudy Bookletter 1911', Georgia, Times, serif;
+    color: black;
+	font-size: 1.3em;
+	width: 200px;
+	border-top: solid 1px gray;
+	border-bottom: solid 1px gray;
+}
+
+#company_info span.header{
+	font-weight: bold;
+	color: #7e7b91;
+}
+
+/*	CUSTOMER	*/
+#customer_info{
+	float: right; 
+	margin: 50px 0px 30px 20px;
+}
+
+#customer_info fieldset{
+	border: solid 1px #dddddd;
+	background-color: #eeeeee;
+	/*
+	background-image: -moz-linear-gradient(top, #fff, #eaeaea, #fff);
+  	background-image: -webkit-gradient(linear,center bottom,center top,from(#fff),color-stop(0.2, #eaeaea),to(#fff));
+	*/
+
+}
+
+/* WORKSITE */
+.worksite_reason{
+	font-family: 'Raleway', Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+	text-align: left;
+	float: left;
+	color: #063674;
+}
+
+#worksites_info th:first-child{
+	width: 500px;
+}
+
+#worksites_info th{
+	width: 100px;
+	height: 25px;
+}
+
+#worksites_info {
+	border: 1px solid #e3e3e3;
+	background-color: #f2f2f2;
+        width: 100%;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+#worksites_info td, #table-2 th {
+	padding: 5px;
+	color: #333;
+}
+
+#worksites_info thead {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	padding: .2em 0 .2em .5em;
+	text-align: left;
+	color: #4B4B4B;
+	background-color: #C8C8C8;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e3e3e3), color-stop(.6,#B3B3B3));
+	background-image: -moz-linear-gradient(top, #D6D6D6, #B0B0B0, #B3B3B3 90%);
+	border-bottom: solid 1px #999;
+}
+#worksites_info th {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	line-height: 20px;
+	font-style: normal;
+	font-weight: normal;
+	text-align: left;
+	text-shadow: white 1px 1px 1px;
+}
+
+#worksites_info td {
+	line-height: 20px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+}
+
+#worksites_info td:hover {
+	background-color: #fff;
+}
+
+/*	Estimate Listing	*/
+#estimate_listing{
+	margin: 30px auto;
+	width: 700px;
+	border: solid black 2px;
+	border-color: #9b9da2;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+
+#estimate_listing th{
+	fond-weight: bold;
+	background-color: #9b9da2;
+	padding: 0;
+	border-width: 0;
+	padding: 10px 10px;
+	color: #e5e8ef;
+}	
+
+#estimate_customer_name_header{
+	width: 200px;
+}
+#estimate_total_header, #estimate_nb_days_header{
+	width: 80px
+}
+#estimate_create_at_header{
+	width: 110px;
+}
+#estimate_show_header, #estimate_edit_header, #estimate_delete_header{
+	width: 30px;
+}
+
+#estimate_listing tfoot td{
+	background-color: #9b9da2;
+	width: 100%;
+}
+	
+	
+	

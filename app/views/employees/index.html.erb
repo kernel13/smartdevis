@@ -1,20 +1,26 @@
 <% content_for :title do %>
-	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+	<h1><%= t('.list_employees')%></h1>
 <% end %>
 
-<h1><%= t('.list_employees')%></h1>
+<% content_for :pageMenu do %>
+	<%= link_to new_employee_path, :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_employee') %></i> 
+	<% end %>
+<% end %>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
-    <th><%= t('.last_name') %></th>
-    <th><%= t('.first_name') %></th>
-    <th><%= t('.day_price') %></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <td><%= t('.last_name') %></td>
+    <td><%= t('.first_name') %></td>
+    <td><%= t('.day_price') %></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
-
+  </thead>
 <% @employees.each do |employee| %>
+  <tbody>
   <tr>
     <td><%= employee.last_name %></td>
     <td><%= employee.first_name %></td>
@@ -23,9 +29,6 @@
     <td><%= link_to t('edit'), edit_employee_path(employee) %></td>
     <td><%= link_to t('destroy'), employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+  </tbody>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to  t('.new_employee'), new_employee_path %>

@@ -1,6 +1,9 @@
 Smartdevis::Application.routes.draw do
 
 
+  get "dashboard/index", :as => "dashboard"
+  delete "companies/logo", :to => "companies#delete_logo", :as => "delete_logo"
+  
   resources :estimates
 
   match "customers/:letter", :to => "customers#index", :constraints => { :letter => /[a-zA-Z]/ }
@@ -16,8 +19,10 @@ Smartdevis::Application.routes.draw do
   resources :companies
   resources :account_home
  
-  root :to => "account_home#index"
+  root :to => "dashboard#index"
   
+  post 'companies/update_logo' => 'companies#update_logo'
+  post 'company/password/:id' => 'companies#reset_password', :as => 'company_password'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

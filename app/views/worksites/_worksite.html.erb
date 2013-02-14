@@ -1,0 +1,50 @@
+<div clase="worksite" id="worksite-<%= worksite.id %>">
+	<br /><br />
+	<div class="worksite_reason"><%= worksite.reason %></div><div class="worksite_action" style="float: right;"> 
+		<%= link_to image_tag('edit-16.png'), edit_worksite_path(worksite), :remote => true, :title => "Edit worksite" %> 
+		<%= link_to image_tag('plein-corbeille-16.png'), worksite_path(worksite), :remote => true, :confirm => "Are you sure?", :method => :delete, :title => "delete worksite" %>	
+	</div>
+
+	<br style="break: both;" />
+	<hr />
+	<p style="text-align: left;"><%= worksite.description %></p>
+
+	<table  class="features-table">
+		<thead>
+			<tr>
+			<td scope ="col" id="estimate_customer_name_header">Material</td>
+		    <td scope ="col" id="estimate_total_header">Quantity</td>
+		    <td scope ="col" id="estimate_nb_days_header">Total TF</td>
+			<td scope ="col" id="estimate_create_at_header">TVA</td>
+			</tr>
+		</thead>
+		<tbody>
+	<% worksite.items.each do |material| %>
+		<tr>
+			<td>
+				<%= material.name %>
+			</td>
+			<td>
+				<%= material.quantity %>
+			</td>
+			<td>
+				<%= material.totalTF %>
+			</td>
+			<td>
+				<%= material.tva %>
+			</td>
+		</tr>
+	<% end %>
+		</tbody>
+	 <!-- Table Footer -->
+	 <tfoot>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</tfoot>
+
+	</table>
+</div>

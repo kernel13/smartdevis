@@ -1,5 +1,5 @@
 <ul class="category_tree">
-	<li class="node"> Categories - <%= link_to "N", new_category_path %>
+	<li class="node"> Categories - <%= link_to new_category_path do %> 	<i class="icon-plus-sign"></i> <% end %>
 		<ul>
 		<%= render @categories %>
 		</ul>

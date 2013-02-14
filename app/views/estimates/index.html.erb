@@ -1,25 +1,50 @@
-<h1>Listing estimates</h1>
-
-<table>
-  <tr>
-    <th>Total</th>
-    <th>Nb days</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @estimates.each do |estimate| %>
-  <tr>
-    <td><%= estimate.total %></td>
-    <td><%= estimate.nb_days %></td>
-    <td><%= link_to 'Show', estimate %></td>
-    <td><%= link_to 'Edit', edit_estimate_path(estimate) %></td>
-    <td><%= link_to 'Destroy', estimate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% content_for :title do %>
+	<h1>Devis</h1>
 <% end %>
-</table>
 
+<% content_for :pageMenu do %>
+	<%= link_to new_estimate_path, :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_estimate') %></i> 
+	<% end %>
+<% end %>
+
+<div id="estimate_listing">
+	<table cellspacing="0">
+	  <!-- Table Header -->	
+	  <thead>
+		<tr>
+		<th scope ="col" id="estimate_customer_name_header">Customer</th>
+	    <th scope ="col" id="estimate_total_header">Total</th>
+	    <th scope ="col" id="estimate_nb_days_header">Nb days</th>
+		<th scope ="col" id="estimate_create_at_header">Created At</th>
+		<th scope ="col" id="estimate_show_header">&nbsp;</th>
+		<th scope ="col" id="estimate_edit_header">&nbsp;</th>
+		<th scope ="col" id="estimate_delete_header">&nbsp;</th>
+		</tr>
+	  </thead>
+
+	 <!-- Table Footer -->
+	 <tfoot>
+		<tr>
+			<td colspan = "7">&nbsp;<%= paginate @estimates %></td>
+		</tr>
+	</tfoot>
+	
+	<tbody>
+	<% @estimates.each do |estimate| %>
+	  <tr>
+		<td><%= estimate.customer_name %></td>
+	    <td><%= estimate.total %></td>
+	    <td><%= estimate.nb_days %></td>
+		<td><%=l estimate.created_at %></td>
+	    <td><%= link_to 'Show', estimate %></td>
+	    <td><%= link_to 'Edit', edit_estimate_path(estimate) %></td>
+	    <td><%= link_to 'Destroy', estimate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+	<% end %>
+	</tbody>
+	</table>
+</div>
+<p id="notice"><%= notice %></p>
 <br />
 
-<%= link_to 'New Estimate', new_estimate_path %>

@@ -1,21 +1,35 @@
 <% content_for :title do %>
-	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+	<h2>Clients</h2>
 <% end %>
 
-<h1><%= t('.list_customers')%></h1>
-
-<div id="customers" style="display: block; width: 800px; float: left;">
-
-<%= render @customers %>
-
-</div>
-
-<div style="display: block; width: 50px; float: right;">
-<p style="border: 1px solid black; width: 20px; margin: 1px; background-color: lightgray;"><%= link_to "...", customers_path %></p>
-<% ("A".."Z").each do |letter| %>
-	<p style="border: 1px solid black; width: 20px; margin: 1px; background-color: lightgray;"><%= link_to letter, customer_path(letter), :remote => true %></p>
+<% content_for :pageMenu do %>
+	<%= link_to new_customer_path, :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_customer') %></i> 
+	<% end %>
 <% end %>
-</div>
 
-<br style="clear: both" />
-<%= link_to 'New Customer', new_customer_path %>
+
+<div id="customer" class="container span9">
+	<div id="customer_list" class="row">
+		<div id="customers" class="span7" >
+
+			<%= render @customers %>
+
+		</div>
+
+		<div class="span1 letters">
+			<div class = "badge badge-inverse">
+				<%= link_to customers_path, :remote => true do %>
+					<i class="icon-th"></i>
+				<% end %>
+			</div>
+			<% ("A".."Z").each do |letter| %>
+				<div class="badge badge-inverse"><%= link_to letter, customer_path(letter), :remote => true %></div>
+			<% end %>
+		</div>
+	</div>
+	<br style="clear: both" />
+	<div id="paginator">
+		<%= paginate @customers, :remote => true %>
+	</div>
+</div>

@@ -1,3 +1,90 @@
 // Place all the styles related to the Customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#customer{
+	margin-left: 60px;
+	margin-top: 60px;
+}
+#customer_list{
+	background-image: url('Customer_bg.jpg');
+	background-repeat: no-repeat;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;		
+
+}
+
+.letters{	
+	width: 95px; 
+	text-align: center; 
+	background-color: #eeeeee;
+	
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-bottom-left-radius: 5px;
+	border-bottom-left-radius: 5px;	
+	
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	
+	padding: 5px;
+	padding-top: 100px; 
+	
+	background: rgb(252,234,187); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,234,187,1)), color-stop(50%,rgba(252,205,77,1)), color-stop(51%,rgba(248,181,0,1)), color-stop(100%,rgba(251,223,147,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(252,234,187,1) 0%,rgba(252,205,77,1) 50%,rgba(248,181,0,1) 51%,rgba(251,223,147,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(252,234,187,1) 0%,rgba(252,205,77,1) 50%,rgba(248,181,0,1) 51%,rgba(251,223,147,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(252,234,187,1) 0%,rgba(252,205,77,1) 50%,rgba(248,181,0,1) 51%,rgba(251,223,147,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(252,234,187,1) 0%,rgba(252,205,77,1) 50%,rgba(248,181,0,1) 51%,rgba(251,223,147,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=0 ); /* IE6-9 */
+	
+
+	
+}
+
+
+.customer_card{
+	display: inline-block; 
+	height: 130px; 
+	width: 120px;
+	border: 0px solid white; 
+	padding: 10px; 
+	margin: 10px;
+	background: #ffffff url('paper.png') no-repeat right top;
+	
+	-moz-box-shadow: 0 0 5px 0px #000;
+	-webkit-box-shadow: 0 0 5px 0px #000;
+	box-shadow: 0 0 5px 0px #000;
+}
+
+.customer_letter{
+	width: 25px; 
+	height: 16px;
+	margin: 4px; 
+	background-color: #303842;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+.customer_letter a{ color: white;}
+.letters a{ color: white; }
+.letters div{ min-width: 10px; }
+.pagination a{
+	color: black;
+}
+
+.pagination span.current{
+	display: inline-block;
+	width: 10px;
+	border: outset 1px white;
+	background-color: #0d2b55;
+	color: white;
+	text-align: center;	
+}
+
+.pagination span.page{
+	margin: 2px;
+}

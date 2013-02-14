@@ -1,9 +1,11 @@
-<div style="display: inline-block; height: 150px; border: 2px outset black; padding: 10px; margin: 5px; ">
-	<p><%= t('.last_name') %> <%= customer.customer_name %></p>
+<div class = "customer_card">
+	<p><%= customer.customer_name %></p>
+	
+	<p><%= customer.address.phone %>&nbsp;</p>
 	
 	<P><%# render "/addresses/address", :address => customer if customer.address %></p>
 
-	<p><%= link_to t('show'), customer, :remote => true %>
-	<%= link_to t('edit'), edit_customer_path(customer) %>
-	<%= link_to t('destroy'), customer, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	<p><%= link_to image_tag('utilisateur.png'), customer, :remote => true %>
+	<%= link_to image_tag('utilisateur_editer.png'), edit_customer_path(customer) %>
+	<%= link_to image_tag('utilisateur_supprimer.png'), customer, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 </div>

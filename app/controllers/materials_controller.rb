@@ -3,11 +3,12 @@ class MaterialsController < InheritedResources::Base
    
    def index
        @categories = Category.where(:parent_id => nil)
-       @materials = Material.all
+       @materials = Material.page(params[:page]).per(10)
        
         respond_to do |format|
           format.html 
           format.json { render json: @materials }
+          format.js
         end
    end
 end

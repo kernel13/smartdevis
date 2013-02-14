@@ -76,6 +76,40 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def update_logo
+     @company = current_account.company
+     
+     respond_to do |format|
+       if @company.update_attributes(params[:logo])
+         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+         format.json { head :no_content }
+         format.js
+       else
+         format.html { render action: "edit" }
+         format.json { render json: @company.errors, status: :unprocessable_entity }
+         format.js
+       end
+     end
+  end
+  
+  def delete_logo    
+    @company = current_account.company
+    @company.remove_logo!
+    
+    respond_to do |format|
+      if @company.save
+        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @company.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def reset_password
+    
+  end
   # DELETE /companies/1
   # DELETE /companies/1.json
   # def destroy

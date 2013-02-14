@@ -1,21 +1,21 @@
 <table>
 	<tr>
-		<td>
+		<td class="material_name">
 			<%# f.select :material_id, Material.all.collect {|m| [m.name, m.id] } %>
 			<%= f.label :name %><br />
 			<%= f.text_field :name, :class => "material_label" %>
 			<%= f.hidden_field :material_id, :class => "material_value" %>
 			<%= f.hidden_field :worksite_id %>
 		</td>
-		<td class="field">
+		<td  class="material_quantity" class="field">
    			<%= f.label :quantity %><br />
    			<%= f.text_field :quantity %>
  		</td>
- 		<td class="field">	
+ 		<td class="material_totalTF" class="field">	
    			<%= f.label :totalTF %><br />
    			<%= f.text_field :totalTF %>
  		</td>
-		<td class="field">	
+		<td class="material_tva" class="field">	
    			<%= f.label :tva %><br />
    			<%= f.text_field :tva %>
 		</td>

@@ -5,15 +5,20 @@ class CustomersController < ApplicationController
    # GET /customers.json
    def index
      if(params[:letter])
-        @customers = current_account.company.customers.find(:all, :conditions => ["lower(customer_name) like ?", "#{params[:letter].downcase}%"])
-     else
-       @customers = current_account.company.customers
-     end
-          
+        @customers = current_account.company.customers.find(:all, :conditions => ["lower(customer_name) like ?", "#{params[:letter].downcase}%"], :include => :address)
+        @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(12)
+     elsif(params[:customer_name])
+        @customers = current_account.company.customers.where("lower(customer_name) like ?", "#{params[:customer_name].downcase}%")
+        @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(12)
+      else
+       @customers = current_account.company.customers.find(:all, :include => :address)
+       @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(12)
+      end
+      
       respond_to do |format|
           format.html # index.html.erb
           format.js
-          format.json { render json: @companies }
+          format.json { render json: @customers, :include => :address }
         end
    end
 
@@ -57,7 +62,7 @@ class CustomersController < ApplicationController
        respond_to do |format|
          if @customer.save
            format.html { redirect_to @customer, notice: 'customer was successfully created.' }
-           format.json { render json: @customer, status: :created, location: @customer }
+           format.json { render json: @customer, include: :address, status: :created, location: @customer }
          else
            format.html { render action: "new" }
            format.json { render json: @customer.errors, status: :unprocessable_entity }

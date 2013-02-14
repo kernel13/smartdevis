@@ -1,38 +1,47 @@
 <% content_for :title do %>
-	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+	<h1><%= t('.list_materials') %></h1>
 <% end %>
 
-<h1><%= t('.list_materials') %></h1>
-
-<div id="materials">
-<table>
-  <tr>
-    <th><%= t('.name') %></th>
-    <th><%= t('.unit_pricetf') %></th>
-	<th><%= t('.category') %></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @materials.each do |material| %>
-  <tr>
-    <td><%= material.name %></td>
-    <td><%= material.unit_priceTF %></td>
-    <td><%= material.category.name if material.category %></td>
-    <td><%= link_to t('show'), material %></td>
-    <td><%= link_to t('edit'), edit_material_path(material) %></td>
-    <td><%= link_to t('destroy'), material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% content_for :pageMenu do %>
+	<%= link_to new_category_path, :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_category') %></i> 
+	<% end %>
+	<%= link_to new_material_path, :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_material') %></i> 
+	<% end %>
 <% end %>
-</table>
 
-<br />
-<%= link_to t('.new_material'), new_material_path %>
+<div class="row">
+	<div id="materials" class="span5">
+	
+	<table class="table">
+	  <thead>
+	  <tr>
+	    <td><%= t('.name') %></td>
+	    <td><%= t('.unit_pricetf') %></td>
+		<td><%= t('.category') %></td>
+	    <td>Menu</td>
+	  </tr>
+		</thead>
+		<tbody>
+		
+		<%= render @materials %>		
 
-</div>
-<div id="categories">
-	<%= render '/categories/tree' %>
+		</tbody>
+		<tfoot>
+			<tr><td colspan="6"><%= paginate @materials, :remote => true %></td></tr>
+		</tfoot>
+		</table>
+
+	
+
+	</div>
+	<div class="span1">
+
+	</div>
+	<div id="categories" class="span4">
+		<%= render '/categories/tree' %>
+	</div>
 </div>
 
 <br style="clear: both;">

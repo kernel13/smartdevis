@@ -1,11 +1,18 @@
 // Place all the styles related to the Materials controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 #materials{
-	float: left;
+
 }
 
 #categories{
-	float: right;
-	margin-right: 100px;
+//	border-left: ridge 5px gray;
 }
+
+.divider{
+	border-left: solid 5px gray;
+}
+
+

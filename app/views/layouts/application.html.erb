@@ -1,7 +1,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">	
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
 		<title>Smart Devis</title>	
 
@@ -13,40 +13,87 @@
 		<meta name="language" content="FR" />
 		<meta name="robots" content="index, follow, All" /> 
 			
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-		
-		<link rel="shortcut icon" href="favicon.ico" />
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		
-
+				
 		<%= stylesheet_link_tag    "application", :media => "all" %>
 	  	<%= javascript_include_tag "application" %>
 	  	<%= csrf_meta_tags %>
 		
     </head>	
 		
-    <body>	ß	
-			 <!-- #HEADER -->	 
-			<div id="header">					
-				<div id="titre">																					
-					<%= content_for?(:title) ? yield(:title) : "<h1>SmartDevis, enfin un logiciel de Facturation adaptée...</h1>".html_safe %>
-				</div>											
+    <body style="background-color: #303842;">	
+	<% if account_signed_in? %>	
+		<div id="headband" class="navbar navbar-inverse navbar-fixed-top">
+				<span class="pull-left">
+					<span style="padding-left: 10px; height: 15px;">Search: </span>	
+				    <input style="height: 15px;" class="span2" id="appendedInputButtons" type="text">					  				
+
+				</span>
+				<span class="pull-right">
+								
+				  <%= current_account.company.company_name if current_account && current_account.company %> | 
+							<%= link_to('Logout', destroy_account_session_path, :method => :delete) %>        
+				
+				</span>
+		</div>
+	 <% end %>
+	
+			<div class="container">
+								
+				<!-- #PAGE -->
+				<div id="page" class="span10">	
+					<div class="row">
+		 				<!-- #HEADER -->	 
+						<div id="bheader" class="span10">					
+																												
+						</div><!-- /HEADER -->
+					</div>
+	
+					<div class="row">
+				 		<!-- #CONTENT -->
+						<div id="content" class="span10">
+							<div class="row">
+								<div class="span4">
+									<%= content_for?(:title) ? yield(:title) : "<div class='page_title'><h1>SMART DEVIS
+									<br /><small>enfin un logiciel de Facturation adaptée</small></h1></div>".html_safe %>
+								</div>
+		
+								<div class="span6">
+									<% if account_signed_in? %>
+									<div class="btn-toolbar pull-right toolbar">
+										<div class="btn-group">
+											<%= yield :pageMenu %>
+										</div>
+										<div class="btn-group">	
+											<%= link_to dashboard_path, :class =>"btn btn-inverse" do %>	
+												<i class="icon-home"></i>
+											<% end %>
+											<button id="menu_button" class="btn btn-inverse"><i class="icon-th-large"></i></button>									
+										</div>	
+									</div>								
+									<% end %>
+								</div>
+							</div>													
+							<div class="row">
+							<div class="span10">
+								<!-- menu -->
+								<%= render 'account_home/menu' if current_account %>
+								<%= yield %>
+							</div>
+							</div>
+						</div><!-- /CONTENT -->	
+					</div>
+
+					<div class="row">
+						<!-- #FOOTER -->
+						<div id="footer" class="span10">
+							<%= image_tag 'header.png', :width => "100%" if !account_signed_in? %>				
+						</div>	<!-- /FOOTER -->
+					</div>
+				</div> <!-- /PAGE -->
+				
 			</div>
-			 <!-- #MIDDLE -->
-			<div id="contenu">
-				<div style="display: inline-block">
-						<h3>
-						<% if account_signed_in? %>					
-						  <%= current_account.company.company_name if current_account && current_account.company %> | 
-									<%= link_to('Logout', destroy_account_session_path, :method => :delete) %>        
-						 <% end %>
-						</h3>
-				</div>
-					<div id="page">										
-						<%= yield %>
-					</div><!-- Page -->
-			</div><!-- MIDDLE -->	
-			<div id="footer"></div>	<!-- #FOOTER -->
+
 </body>
 </html>

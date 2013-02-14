@@ -1,14 +1,9 @@
-<div class="address">
-	<b><%= t('.address_line1') %> </b>
+<address>
 	<%= address.address.address_line1 %>
 	<br />
-	<b><%= t('.address_line2') %> </b>
 	<%= address.address.address_line2 %>
 	<br />
-	<b><%= t('.city') %> </b>
-	<%= address.address.city %>
-	<br />
-	<b><%= t('.postal_code') %></b>
+	<%= address.address.city %>,
 	<%= address.address.postal_code %>
 	<br />
 	<b><%= t('.email') %> </b>
@@ -16,4 +11,4 @@
 	<br />
 	<b><%= t('.phone') %> </b>
 	<%= address.address.phone %>	
-</div>
+</address>

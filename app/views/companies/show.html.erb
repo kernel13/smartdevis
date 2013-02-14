@@ -1,34 +1,115 @@
 <% content_for :title do %>
-	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+	<h1>Information <small>sur votre entreprise</small></h1>
 <% end %>
 
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b><%= t('.siret')%></b>
-  <%= @company.siret %>
-</p>
-
-<p>
-  <b><%= t('.company_name')%></b>
-  <%= @company.company_name %>
-</p>
-
-<p>
-  <b><%= t('.logo')%></b>
-  <%= image_tag @company.logo_url.to_s if @company.logo_url %>	
-</p>
-
-<%= render "/addresses/address", :address => @company %>
-
-<div class="comptes">
-<ul>
-<% @company.accounts.each do |account| %>
-		<li><%= account.email %></li>
+<% content_for :pageMenu do %>
+	<%= link_to "new account path", :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_account') %></i> 
+	<% end %>
 <% end %>
-</ul>
-</div>
-<br />
+
+
+<div id="company" class="container">
+	
+	
+	<p id="notice"><%= notice %></p>
+
+	<div class="row">
+		<div class="span5">
+  		<span class="label" title="Information générale de votre entreprise. Vous pouvez modifer le logo à partir de cette interface.">Identité entreprise</span>
+  		<span class = "content">
+			<table class="table">
+				<tr>
+					<td><div class="tumbnails"><%= image_tag @company.logo_url.to_s if @company.logo_url %></div></td>
+					<td>
+						<div class="bnt-group">
+						<%= link_to delete_logo_path, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-info" do %>
+							<i class="icon-trash"></i>
+						<% end %>
+
+						<!--<button  id = "company_logo_button" class="btn btn-info" title="change logo"><i class="icon-picture"></i></button> -->
+						</div>
+						
+						<%= form_for(:logo, 
+									 :url => { :controller => "companies", :action => :update_logo }, 
+									 :html => {:method => :post, :multipart => true }, 
+									 :remote => true) do |f| %>		
+
+					 		<%= f.file_field :logo %>
+							<%= f.submit "Save", :class => "btn btn-info" %>
+
+						<% end %>
+								
+					</td>					
+				</tr>
+				<tr>
+					<td><span class="header">Nom de la société:</span></td> 
+					<td><%= @company.company_name %></td>
+				</tr>
+				<tr>
+					<td><span class="header">Numéro de siret:</span></td>
+					<td><%= @company.siret %></td>
+				</tr>
+			</table>
+		</span>
+		</div>	
+		<div class="span4">
+			<span class="label">Address</span>
+			<div class="hero-unit"><%= render "/addresses/address", :address => @company %></div>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="span9">
+		<span class="content">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td>Comptes</td>
+					<td>Created On</td>
+				</tr>
+			</thead>
+			<tbody>
+			<% @company.accounts.each do |account| %>
+				<tr>
+					<td style="width: 200px;"><%= account.email %></td>
+					<td><%= account.created_at.strftime("%a %d %b %y %H %M") %></td>
+					<td><i class="icon-pencil"></i></td>
+					<td><i class="icon-remove"></i></td>
+					<td>
+						<%# link_to company_password_path(account), :method => :post, :remote => true, :id => "company_reset_password" do %>
+						<%= link_to  "#passwordModal", :role => "button", :'data-toggle' => "modal" do %>
+							<i class="icon-wrench"></i>
+						<% end %>
+						
+						<%= form_for account, :url => account_password_url do |f| %>
+						<div id="passwordModal" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						    <h3>Password reset: <small><%= account.email %></small></h3>
+						  </div>
+						  <div class="modal-body">
+							Password: <%= f.password_field :password %> <br />
+							Confirm password: <%= f.password_field :password_confirmation %>
+						  </div>
+						  <div class="modal-footer">
+						    <a href="#" class="btn">Close</a>
+						    <%= f.submit "Save changes", :class => "btn btn-primary" %>
+						  </div>
+						</div>
+						<% end %>
+												
+					</td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+		</span>
+		<span class="footer" title="Liste des comptes qui peuvent se connecter á l'interface">Comptes</span>
+		</div>
+	</div>
+
 
 <%= link_to t('edit'), edit_company_path(@company) %> |
 <%= link_to t('back'), companies_path %>

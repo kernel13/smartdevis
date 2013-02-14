@@ -7,9 +7,13 @@ fr:
     helpers:
         submit:
             create: "Créer"
-            update: "Sauvergarder"        
+            update: "Sauvergarder"   
+    date:
+        formats:
+            default: "%d/%m/%Y"     
     time:
         formats:
+            default: "%d/%m/%Y - %H:%M" 
             long: "%Y-%m-%d %H:%M:%S"
     activerecord:
         errors:
