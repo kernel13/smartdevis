@@ -26,6 +26,16 @@ fr:
                     attributes:
                          siret:
                             wrong_length: "longueur invalide (devrait etre de 14 caracteres)"
+                account:
+                    attributes:
+                        password:
+                            blank: "Ce champs ne peut être vide"
+                            confirmation: "Les mots de passe ne corresponde pas"
+                            too_short: "Le mote de passe est trop court"
+                        email:
+                            blank: "Ce champs ne peut être vide"
+                            invalid: "L'email n'est pas valide"
+                    
         attributes:
             company:
                company_name: "Nom"   

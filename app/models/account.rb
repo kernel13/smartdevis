@@ -13,4 +13,5 @@ class Account < ActiveRecord::Base
   attr_accessible :remember_created_at, :current_sign_in_at
   attr_accessible :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip
   # attr_accessible :title, :body
+  
 end

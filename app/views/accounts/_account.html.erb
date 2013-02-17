@@ -1,0 +1,54 @@
+
+<tr id="account_row_<%= account.id %>">
+	<td style="width: 200px;"><%= account.email %></td>
+	<td><%= account.created_at.strftime("%a %d %b %y %H %M") %></td>
+	
+	<td>
+		<% if account.id != current_account.id%>
+			<%= link_to account, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true do %>
+				<i class="icon-remove"></i>
+			<% end %>
+		<% end %>
+	</td>
+	
+	<td>													
+	
+		<%= link_to  "#passwordModal#{account.id}", :role => "button", :'data-toggle' => "modal" do %>
+			<i class="icon-wrench"></i>
+		<% end %>
+
+		
+		<%= form_for(account, :as => "account", :url => account_path(account), :html => { :method => :put, :class => "form-horizontal", :remote => true }) do |f| %>
+
+		<div id="passwordModal<%= account.id %>" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>Password reset: <small><%= account.email %></small></h3>
+		  </div>
+		  <div class="modal-body">
+
+			<div id="password_field_<%= account.id %>" class="control-group">
+				<%= f.label :password, :class => "control-label"%> 
+				<div class="controls"><%= f.password_field :password, :namespace => account.id %></div>
+			</div>
+
+			<div id="password_confirmation_field_<%= account.id %>" class="control-group">
+				<%= f.label :password_confirmation, :class => "control-label"%> 
+				<div class="controls"><%= f.password_field :password_confirmation, :namespace => account.id %></div>
+			</div>
+
+		  </div>
+		  <div class="modal-footer">
+			<div class="control-group">
+				<div class="controls">
+		    		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+		    		<%= f.submit "Save changes", :class => "btn btn-primary" %>
+				</div>
+			</div>
+		  </div>
+		</div>
+
+		<% end %>	
+										
+	</td>
+</tr>

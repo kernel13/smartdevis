@@ -1,0 +1,35 @@
+var html = "";
+
+$("#account_password").closest("div.controls").find("ul").remove();
+$("#account_email").closest("div.controls").find("ul").remove();
+
+<% if @account.errors.any? %>
+	
+	<% if @account.errors[:email] %>
+		$("#account_email").closest("div.control-group").addClass("error");
+		html = "<ul class='help-inline'>"
+  	    <% @account.errors[:email].each do |error| %>
+   		html = html + "<li><span><%= error %></span></li>";
+	    <% end %>
+		html = html + "</ul>"
+		$("#account_email").closest("div.controls").append(html);
+    <% end %>
+
+   <% if @account.errors[:password] %>
+		$("#account_password").closest("div.control-group").addClass("error");
+		html = "<ul class='help-inline'>"
+  	    <% @account.errors[:password].each do |error| %>
+   		html = html + "<li><span><%= error %></span></li>";
+	    <% end %>
+		html = html + "</ul>"
+		$("#account_password").closest("div.controls").append(html);
+    <% end %>
+
+ <% else %>
+	$("#account_password").closest("div.control-group").removeClass("error");
+	$("#account_email").closest("div.control-group").removeClass("error");
+
+	$("#company_account_list").append("<%=j render @account %>");
+
+	$("#newAccountModal").modal('hide') ;
+<% end %>

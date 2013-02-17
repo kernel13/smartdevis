@@ -4,8 +4,8 @@
 
 
 <% content_for :pageMenu do %>
-	<%= link_to "new account path", :class => "btn btn-inverse" do %>
-		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_account') %></i> 
+	<%= link_to new_account_path, :remote => true, :class => "btn btn-inverse" do %>
+			<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_account') %></i>		
 	<% end %>
 <% end %>
 
@@ -21,25 +21,19 @@
   		<span class = "content">
 			<table class="table">
 				<tr>
-					<td><div class="tumbnails"><%= image_tag @company.logo_url.to_s if @company.logo_url %></div></td>
+					<td><div id="company_logo" class="tumbnails"><%= image_tag @company.logo_url.to_s if @company.logo_url %></div></td>
 					<td>
 						<div class="bnt-group">
-						<%= link_to delete_logo_path, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-info" do %>
+						<%= link_to delete_logo_path, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => "btn btn-info", :id => 'delete_logo_btn' do %>
 							<i class="icon-trash"></i>
 						<% end %>
-
-						<!--<button  id = "company_logo_button" class="btn btn-info" title="change logo"><i class="icon-picture"></i></button> -->
+						<button  id = "upload_logo_button" class="btn btn-info" title="change logo" data-toggle="modal" data-target="#uploadModal"><i class="icon-picture"></i></button>	
+							
+						<%= image_tag 'ajax-loader.gif', :class => 'hidden', :id => 'delete_logo_loader' %>						
 						</div>
 						
-						<%= form_for(:logo, 
-									 :url => { :controller => "companies", :action => :update_logo }, 
-									 :html => {:method => :post, :multipart => true }, 
-									 :remote => true) do |f| %>		
-
-					 		<%= f.file_field :logo %>
-							<%= f.submit "Save", :class => "btn btn-info" %>
-
-						<% end %>
+								
+						<%= render 'file_upload'%>					
 								
 					</td>					
 				</tr>
@@ -63,7 +57,7 @@
 	<div class="row">
 		<div class="span9">
 		<span class="content">
-		<table class="table table-hover">
+		<table id="company_account_list" class="table table-hover">
 			<thead>
 				<tr>
 					<td>Comptes</td>
@@ -71,38 +65,9 @@
 				</tr>
 			</thead>
 			<tbody>
-			<% @company.accounts.each do |account| %>
-				<tr>
-					<td style="width: 200px;"><%= account.email %></td>
-					<td><%= account.created_at.strftime("%a %d %b %y %H %M") %></td>
-					<td><i class="icon-pencil"></i></td>
-					<td><i class="icon-remove"></i></td>
-					<td>
-						<%# link_to company_password_path(account), :method => :post, :remote => true, :id => "company_reset_password" do %>
-						<%= link_to  "#passwordModal", :role => "button", :'data-toggle' => "modal" do %>
-							<i class="icon-wrench"></i>
-						<% end %>
-						
-						<%= form_for account, :url => account_password_url do |f| %>
-						<div id="passwordModal" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-header">
-						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						    <h3>Password reset: <small><%= account.email %></small></h3>
-						  </div>
-						  <div class="modal-body">
-							Password: <%= f.password_field :password %> <br />
-							Confirm password: <%= f.password_field :password_confirmation %>
-						  </div>
-						  <div class="modal-footer">
-						    <a href="#" class="btn">Close</a>
-						    <%= f.submit "Save changes", :class => "btn btn-primary" %>
-						  </div>
-						</div>
-						<% end %>
-												
-					</td>
-				</tr>
-			<% end %>
+					<!-- Password change form -->						
+					<%= render @company.accounts %>
+			
 			</tbody>
 		</table>
 		</span>
@@ -111,5 +76,5 @@
 	</div>
 
 
-<%= link_to t('edit'), edit_company_path(@company) %> |
-<%= link_to t('back'), companies_path %>
+<%# link_to t('edit'), edit_company_path(@company) %> 
+<%# link_to t('back'), companies_path %>

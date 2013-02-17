@@ -1,0 +1,33 @@
+var html = "";
+
+$("#password_field_<%= @account.id %> div.controls ul").remove();
+$("#password_confirmation_field_<%= @account.id %> div.controls ul").remove();
+
+<% if @account.errors.any? %>
+	
+   <% if @account.errors[:password] %>
+		$("#password_field_<%= @account.id %>").addClass("error");
+		html = "<ul class='help-inline'>"
+  	    <% @account.errors[:password].each do |error| %>
+   		html = html + "<li><span><%= error %></span></li>";
+	    <% end %>
+		html = html + "</ul>"
+		$("#password_field_<%= @account.id %> div.controls").append(html);
+    <% end %>
+
+ 	<% if @account.errors[:password_confirmation] %>
+		$("#password_confirmation_field_<%= @account.id %>").addClass("error");
+		html = "<ul class='help-inline'>"
+  	    <% @account.errors[:password_confirmation].each do |error| %>
+   			html = html + "<li><span><%= error %></span></li>";
+	    <% end %>
+		html = html + "</ul>"
+		$("#password_confirmation_field_<%= @account.id %> div.controls").append(html);
+    <% end %>
+
+ <% else %>
+	$("#password_field_<%= @account.id %>").removeClass("error");
+	$("#password_confirmation_field_<%= @account.id %>").removeClass("error");
+	
+	$("#passwordModal<%= @account.id %>").modal('hide') ;
+<% end %>

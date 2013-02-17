@@ -30,6 +30,12 @@ body{
 	min-height: 300px;
 }
 
+span.content
+{
+	height: 50px;
+	overflow: scroll;
+}
+
 #footer{
 	
 }

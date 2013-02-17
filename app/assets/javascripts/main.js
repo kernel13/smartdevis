@@ -1,7 +1,9 @@
 
 
 $(function(){
-
+	$("#delete_logo_btn").click(function(){
+		$("#delete_logo_loader").removeClass("hidden");
+	});
 	$("#company_reset_password_form").dialog({ autoOpen: false });
 	$("#company_reset_password").click(function(){
 		$("#company_reset_password_form").dialog("open");

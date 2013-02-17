@@ -1,0 +1,8 @@
+
+<% if @company.errors.any? %>
+	alert("La suppression á échoué.");
+<% else %>
+	$("#company_logo").remove();
+	$("#delete_logo_loader").addClass("hidden");
+	alert("L'image a été supprimé avec succés");
+<% end %>

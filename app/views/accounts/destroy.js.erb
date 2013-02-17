@@ -1,0 +1,6 @@
+
+<% if @account.errors.any? %>
+
+<% else %>
+	$("#account_row_<%= @account.id %>").closest("tr").remove();
+<% end %>

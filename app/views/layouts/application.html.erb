@@ -31,7 +31,8 @@
 
 				</span>
 				<span class="pull-right">
-								
+				
+				  <%= current_account.email %> |
 				  <%= current_account.company.company_name if current_account && current_account.company %> | 
 							<%= link_to('Logout', destroy_account_session_path, :method => :delete) %>        
 				

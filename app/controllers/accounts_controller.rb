@@ -26,10 +26,12 @@ class AccountsController < ApplicationController
   # GET /accounts/new.json
   def new
     @account = Account.new
+    @account.company_id = current_account.company.id
     
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @account }
+      format.js
     end
   end
 
@@ -42,14 +44,17 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(params[:account])
-
+    @account.company_id = current_account.company.id
+ 
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'account was successfully created.' }
         format.json { render json: @account, status: :created, location: @account }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @account.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -58,14 +63,18 @@ class AccountsController < ApplicationController
   # PUT /accounts/1.json
   def update
     @account = Account.find(params[:id])
-
+    current_account_id = current_account.id
+    
     respond_to do |format|
-      if @account.update_attributes(params[:account])
-        format.html { redirect_to @account, notice: 'account was successfully updated.' }
+      if @account.update_attributes(params[:account])        
+        sign_in @account, :bypass => true if @account.id == current_account_id
+        format.html { redirect_to @account.company, notice: 'account was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @account.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -79,6 +88,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to accounts_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end
