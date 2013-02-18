@@ -368,3 +368,57 @@ Address = function(address){
 	}
 }
 
+
+//------------------------------------------------
+//	Class: ErrorHandler
+//------------------------------------------------
+ErrorHandler = function()
+{
+	this.__errors = new Array()
+
+	this.Add = function(dom, errors){
+		
+		errors = errors.replace(/&quot;/g, "");
+		errors = errors.replace("[", "");
+		errors = errors.replace("]", "");
+		errors = errors.split(",");
+		
+		var h = {};
+		h['dom'] = dom;
+		h['errors'] = errors;
+		
+		this.__errors.push(h);
+	}
+	
+	this.ShowErrors = function(){
+
+		// Remove any previous errror
+		this.RemoveErrors();
+
+		for(var item in this.__errors){
+			var current_error = this.__errors[item];
+			
+			$(current_error.dom).closest("div.control-group").addClass("error");
+			
+			var html = "<ul class='help-inline'>";
+			for(var err in current_error.errors){
+				html = html + "<li><span>" + current_error.errors[err] + "</span></li>";
+			}
+			html = html + "</ul>";
+			
+			$(current_error.dom).closest("div.controls").append(html);
+		}
+		
+	}
+	
+	this.RemoveErrors = function(){
+		
+		for(var item in this.__errors){
+			var current_error = this.__errors[item];
+			$(current_error.dom).closest("div.control-group").removeClass("error");
+			$(current_error.dom).closest("div.controls").find("ul").remove();
+		}
+	}
+}
+
+

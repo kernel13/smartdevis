@@ -7,4 +7,7 @@ class Customer < ActiveRecord::Base
   attr_accessible :customer_name, :company_id
   attr_accessible :address_attributes
   
+  
+  validates :customer_name, :presence => true
+  validates :customer_name, :uniqueness => true
 end

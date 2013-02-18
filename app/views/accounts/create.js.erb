@@ -1,31 +1,16 @@
-var html = "";
-
-$("#account_password").closest("div.controls").find("ul").remove();
-$("#account_email").closest("div.controls").find("ul").remove();
+var err = new ErrorHandler();
 
 <% if @account.errors.any? %>
-	
 	<% if @account.errors[:email] %>
-		$("#account_email").closest("div.control-group").addClass("error");
-		html = "<ul class='help-inline'>"
-  	    <% @account.errors[:email].each do |error| %>
-   		html = html + "<li><span><%= error %></span></li>";
-	    <% end %>
-		html = html + "</ul>"
-		$("#account_email").closest("div.controls").append(html);
-    <% end %>
-
-   <% if @account.errors[:password] %>
-		$("#account_password").closest("div.control-group").addClass("error");
-		html = "<ul class='help-inline'>"
-  	    <% @account.errors[:password].each do |error| %>
-   		html = html + "<li><span><%= error %></span></li>";
-	    <% end %>
-		html = html + "</ul>"
-		$("#account_password").closest("div.controls").append(html);
-    <% end %>
-
- <% else %>
+		err.Add("#account_email", "<%= @account.errors[:email] %>");
+	<% end %>
+	
+	<% if @account.errors[:password] %>
+		err.Add("#account_password", "<%= @account.errors[:password] %>");		
+	<% end %>
+	
+	err.ShowErrors();
+<% else %>
 	$("#account_password").closest("div.control-group").removeClass("error");
 	$("#account_email").closest("div.control-group").removeClass("error");
 

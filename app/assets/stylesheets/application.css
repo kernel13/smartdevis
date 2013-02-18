@@ -92,3 +92,21 @@ span.content
 .toolbar{
 	margin-right: 70px;
 }
+
+h2.title{
+	text-align: center;
+	color: white;
+	background-color: #414c5b;
+	
+	border-top: inset 2px white;
+	border-bottom: inset 2px white;	
+	border-right: inset 2px white;
+	
+	-webkit-border-top-right-radius: 20px;
+	-moz-border-top-right-radius: 20px;
+	border-top-right-radius: 20px;
+	
+	-webkit-border-bottom-right-radius: 20px;
+	-moz-border-bottom-right-radius: 20px;
+	border-bottom-right-radius: 20px;	
+}

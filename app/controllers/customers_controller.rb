@@ -44,6 +44,7 @@ class CustomersController < ApplicationController
          respond_to do |format|
            format.html # new.html.erb
            format.json { render json: @customer }
+           format.js
          end
      end
 
@@ -63,9 +64,11 @@ class CustomersController < ApplicationController
          if @customer.save
            format.html { redirect_to @customer, notice: 'customer was successfully created.' }
            format.json { render json: @customer, include: :address, status: :created, location: @customer }
+           format.js
          else
            format.html { render action: "new" }
            format.json { render json: @customer.errors, status: :unprocessable_entity }
+           format.js
          end
        end
      end

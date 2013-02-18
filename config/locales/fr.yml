@@ -35,6 +35,11 @@ fr:
                         email:
                             blank: "Ce champs ne peut être vide"
                             invalid: "L'email n'est pas valide"
+                customer:
+                    attributes:
+                        customer_name:
+                            blank: "Le nom doit être renseigné"
+                            taken: "Ce client existe déjä"
                     
         attributes:
             company:
@@ -64,6 +69,7 @@ fr:
             customer:
                 last_name: "Nom"
                 first_name: "Prénom"
+                customer_name: "Nom du client"
             category:
                 name: "Nom"
                 parent: "Parent"

@@ -1,9 +1,9 @@
 <% content_for :title do %>
-	<h2>Clients</h2>
+	<h2 class="title">Clients</h2>
 <% end %>
 
 <% content_for :pageMenu do %>
-	<%= link_to new_customer_path, :class => "btn btn-inverse" do %>
+	<%= link_to new_customer_path, :remote => true, :class => "btn btn-inverse" do %>
 		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_customer') %></i> 
 	<% end %>
 <% end %>
