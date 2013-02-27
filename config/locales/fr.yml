@@ -26,6 +26,11 @@ fr:
                     attributes:
                          siret:
                             wrong_length: "longueur invalide (devrait etre de 14 caracteres)"
+                category:
+                    attributes:
+                        name:
+                            blank: "Le nom est obligatoire"
+                            taken: "Ce nom existe déjà"
                 account:
                     attributes:
                         password:
@@ -40,6 +45,19 @@ fr:
                         customer_name:
                             blank: "Le nom doit être renseigné"
                             taken: "Ce client existe déjä"
+                employee:
+                    attributes:
+                        last_name:
+                            blank: "Le nom est obligatoire"
+                        first_name: 
+                            blank: "Le prénom et obligatoire"
+                        day_price:
+                            blank: "Le coût journalier est obligatoire"
+                material:
+                    attributes:
+                        name:
+                            blank: "Le nom est obligatoire"
+                            taken: "Le nom doit être unique"
                     
         attributes:
             company:
@@ -105,11 +123,14 @@ fr:
             last_name: "Nom"
             first_name: "Prénom"
             day_price: "Prix à la journée"
-            list_employees: "Afficher les employées"
+            list_employees: "Employées"
             new_employee: "Nouvel employée"
+        new:
+            new_employee: "Nouvel employé"
+            cancel: "Annuler"
     customers:
         edit:
-            edit_customer: "Modifier un client"
+            edit_customer: "Modifier un client"          
         customer:
             last_name: "Nom"
             first_name: "Prénom"
@@ -124,6 +145,7 @@ fr:
             unit_pricetf: "Prix unitaire HT"
             category: "Categorie"
             new_material: "Nouveau matériel"
+            new_category: "Nouvelle categorie"
     categories:
         index:
             name: "Nom"
@@ -133,3 +155,6 @@ fr:
             new_category: "Nouvelle categorie"
         edit:
             edit_category: "Editer Categorie"
+    estimates:
+        form:
+            customer: "Client"  

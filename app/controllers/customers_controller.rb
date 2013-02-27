@@ -1,18 +1,20 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_account!
-  
+   NB_ITERM_PER_PAGE = 1000
+   
    # GET /customers
    # GET /customers.json
    def index
+     
      if(params[:letter])
         @customers = current_account.company.customers.find(:all, :conditions => ["lower(customer_name) like ?", "#{params[:letter].downcase}%"], :include => :address)
-        @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(12)
+        @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(NB_ITERM_PER_PAGE)
      elsif(params[:customer_name])
         @customers = current_account.company.customers.where("lower(customer_name) like ?", "#{params[:customer_name].downcase}%")
-        @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(12)
+        @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(NB_ITERM_PER_PAGE)
       else
        @customers = current_account.company.customers.find(:all, :include => :address)
-       @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(12)
+       @customers = Kaminari.paginate_array(@customers).page(params[:page]).per(NB_ITERM_PER_PAGE)
       end
       
       respond_to do |format|

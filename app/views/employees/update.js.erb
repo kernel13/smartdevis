@@ -1,0 +1,13 @@
+
+// Replace the table column
+$("#employee_<%= @employee.id %>").replaceWith("<%=j render @employee %>");
+
+// Bind the on click event
+$("#employee_<%= @employee.id %>").on("click",function(){
+	var id = $(this).find("input").val();
+
+	
+	$(this).attr("href", "/employees/" + id + "/edit");
+	$(this).attr("method", "GET");
+	$.rails.handleRemote( $(this) );
+});

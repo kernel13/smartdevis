@@ -7,7 +7,8 @@ Smartdevis::Application.routes.draw do
   resources :estimates
 
   match "customers/:letter", :to => "customers#index", :constraints => { :letter => /[a-zA-Z]/ }
- 
+  match "materials/category/:category", :to => "materials#index", :as => :material_category, :constraints => { :category => /.*/ }
+
   resources :materials, :categories, :worksites,  :customers, :employees
 
   devise_for :accounts

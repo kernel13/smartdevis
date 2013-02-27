@@ -4,4 +4,7 @@ class Category < ActiveRecord::Base
   belongs_to :parent, :class_name => "Category"
   
   attr_accessible :name, :parent_id
+
+  validates :name, :presence => true
+  validates :name, :uniqueness => true
 end

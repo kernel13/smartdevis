@@ -1,4 +1,5 @@
-<%= nested_form_for(@worksite, :remote => true) do |f| %>
+
+<%= nested_form_for(@worksite, remote: true) do |f| %>
   <% if @worksite.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@worksite.errors.count, "error") %> prohibited this worksite from being saved:</h2>
@@ -28,11 +29,12 @@
     <%= f.text_field :work_end_on %>
   </div>
 
+
   <%= f.fields_for :items do |item_field| %>
 		<%= render "/worksites/item_fields", :f => item_field %>
   <% end %>
 
-  <br style="clear: both;" />
+
   <p><%= f.link_to_add t('.add_a_material'), :items %></p>
 
 

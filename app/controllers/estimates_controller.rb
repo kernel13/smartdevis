@@ -1,4 +1,5 @@
 class EstimatesController < InheritedResources::Base
+  before_filter :authenticate_account!
   
   #Index action
   def index

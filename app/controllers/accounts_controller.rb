@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_filter :authenticate_account!
 
   # GET /accounts
   # GET /accounts.json

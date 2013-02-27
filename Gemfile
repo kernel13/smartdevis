@@ -41,7 +41,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
   gem 'less-rails-bootstrap'
   gem 'therubyracer'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '>= 1.0.3'  
 end
 
 group :production do
@@ -51,6 +51,7 @@ end
 
 gem 'jquery-rails'
 gem 'activeadmin'
+gem 'twitter_bootstrap_form_for'
 gem 'nested_form'
 gem 'mini_magick'
 gem 'carrierwave'

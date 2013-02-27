@@ -1,6 +1,141 @@
 
 
 $(function(){
+	//
+	// Materials
+	//
+	$("#materials tr").on("mouseover", function(){
+		$(this).css("cursor", "pointer")
+	});
+	$("#materials tr").on("click",function(){
+		var id = $(this).find("input").val();
+	
+		
+		$(this).attr("href", "/materials/" + id + "/edit");
+		$(this).attr("method", "GET");
+		$.rails.handleRemote( $(this) );
+	});
+
+
+	$("#material_tree").jstree({
+			"plugins" : [ "themes", "html_data", "ui", "crrm", "contextmenu" ],
+			contextmenu: {
+				items: {
+				ccp: false
+				}
+			}
+		})
+		.on('loaded.jstree', function() {
+    		$("#material_tree").jstree('open_all');
+  		})
+  		.on("create.jstree", function(e, data){
+
+  			var parent_id = data.rslt.parent.find("a").attr("id").replace("node_","");
+  			var name = data.rslt.name;
+			
+			$.ajax({
+				type: "POST",
+	            url: "/categories",
+	            data: {
+					"authenticity_token": $('meta[name="csrf-token"]').attr('content'),
+	            	"category":
+	            	{
+	                	"parent_id" : data.rslt.parent.find("a").attr("id").replace("node_",""),	              	
+	                	"name" : data.rslt.name
+	            	}
+	        	},
+	            success: function (r) {	           
+	                  $(data.rslt.obj).attr("id", "node_" + r.id);
+	            },
+	            error: function(r){
+	            	//alert(JSON.stringify(r.responseText, null, 4));
+	            	alert($.parseJSON(r.responseText).name);
+					$.jstree.rollback(data.rlbk);	                   
+	            },
+	            dataType: "json"
+	        });  	       			
+  		})
+  		.on("remove.jstree", function(e, data){
+			
+			$.ajax({
+				type: "delete",
+	            url: "/categories/" + data.rslt.obj.find("a").attr("id").replace("node_",""),	           
+	            success: function (r) {	 
+
+	                  //$(data.rslt.obj).attr("id", "node_" + r.id);
+	            },
+	            error: function(r){
+	            	//alert(JSON.stringify(r.responseText, null, 4));
+	            	
+					$.jstree.rollback(data.rlbk);	                   
+	            },
+	            dataType: "json"
+	        })
+		})
+		.on("rename.jstree", function(e, data){
+
+  			var id = data.rslt.obj.find("a").attr("id").replace("node_","");
+  			var name = data.rslt.new_name;
+			
+			$.ajax({
+				type: "PUT",
+	            url: "/categories/" + id,
+	            data: {
+					"authenticity_token": $('meta[name="csrf-token"]').attr('content'),
+	            	"category":
+	            	{              	
+	                	"name" : name
+	            	}
+	        	},
+	            error: function(r){
+	            	//alert(JSON.stringify(r.responseText, null, 4));
+	            	alert($.parseJSON(r.responseText).name);
+					$.jstree.rollback(data.rlbk);	                   
+	            },
+	            dataType: "json"
+	        });  	       			
+  		});  
+
+	//
+	//	Employee
+	//
+	$("#employees tr").on("mouseover", function(){
+		$(this).css("cursor", "pointer")
+	});
+	$("#employees tr").on("click",function(){
+		var id = $(this).find("input").val();
+	
+		
+		$(this).attr("href", "/employees/" + id + "/edit");
+		$(this).attr("method", "GET");
+		$.rails.handleRemote( $(this) );
+	});
+	
+	//
+	// Customer letter scrolling
+	//
+	var el = $('#div_letter');
+	var originalelpos;
+	if(el.offset() != null)
+		originalelpos = el.offset();
+	
+    $(window).scroll(function () {
+         var el = $('#div_letter'); // important! (local)
+         var elpos = el.offset().top; // take current situation
+         var windowpos = $(window).scrollTop();
+         var finaldestination = windowpos + originalelpos;
+         el.stop().animate({ 'margin-top': windowpos }, 200);
+    });
+
+	 $(".badge a").click(function(){
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		//el.stop().animate({ 'margin-top': 0 }, 200);
+	 });
+	// End of customer scrolling
+
+	//
+	//	Company file upload and delete
+	//
 	$("#delete_logo_btn").click(function(){
 		$("#delete_logo_loader").removeClass("hidden");
 	});
@@ -8,9 +143,8 @@ $(function(){
 	$("#company_reset_password").click(function(){
 		$("#company_reset_password_form").dialog("open");
 	}); 
-	//
-	//	Company file upload
-	//
+	
+	
 	$(".file_upload_form").dialog({ 
 		autoOpen: false,
 		buttons: {
@@ -412,9 +546,9 @@ ErrorHandler = function()
 	}
 	
 	this.RemoveErrors = function(){
-		
 		for(var item in this.__errors){
 			var current_error = this.__errors[item];
+			
 			$(current_error.dom).closest("div.control-group").removeClass("error");
 			$(current_error.dom).closest("div.controls").find("ul").remove();
 		}

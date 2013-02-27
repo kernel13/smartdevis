@@ -89,12 +89,13 @@ span.content
 	text-align:center;
 	vertical-align:middle;
 }
-
+	
 .toolbar{
 	margin-right: 70px;
 }
 
 h2.title{
+	margin-left: 10px;
 	text-align: center;
 	color: white;
 	background-color: #414c5b;
@@ -103,11 +104,8 @@ h2.title{
 	border-bottom: inset 2px white;	
 	border-right: inset 2px white;
 	
-	-webkit-border-top-right-radius: 20px;
-	-moz-border-top-right-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
 	border-top-right-radius: 20px;
-	
-	-webkit-border-bottom-right-radius: 20px;
-	-moz-border-bottom-right-radius: 20px;
-	border-bottom-right-radius: 20px;	
+		
 }

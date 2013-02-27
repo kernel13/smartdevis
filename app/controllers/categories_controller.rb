@@ -32,6 +32,7 @@ class CategoriesController < ApplicationController
          respond_to do |format|
            format.html # new.html.erb
            format.json { render json: @categories }
+           format.js
          end
      end
 
@@ -40,18 +41,21 @@ class CategoriesController < ApplicationController
      @category = Category.find(params[:id])
    end
 
-   # POST /employees
-   # POST /employees.json
+   # POST /category
+   # POST /category.json
     def create
        @category = Category.new(params[:category])
-    
+       @categories = Category.where(:parent_id => nil)
+       
        respond_to do |format|
          if @category.save
            format.html { redirect_to @category, notice: 'Category was successfully created.' }
            format.json { render json: @category, status: :created, location: @category }
+           format.js
          else
            format.html { render action: "new" }
            format.json { render json: @category.errors, status: :unprocessable_entity }
+           format.js
          end
        end
      end

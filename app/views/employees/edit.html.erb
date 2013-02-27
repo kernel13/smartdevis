@@ -1,4 +1,6 @@
-<h1><%= t('edit_employee') %></h1>
+<% content_for :title do %>
+	<h2 class="title"><%= t('edit_employee') %></h2>
+<% end %>
 
 <%= render 'form' %>
 

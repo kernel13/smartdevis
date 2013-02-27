@@ -1,0 +1,7 @@
+
+$("#material_<%= @material.id %>").html("<%=j render 'inline_form' %>");
+
+$("#submit_material_inline_form_<%= @material.id %>").on("click", function (e) {
+		$(this).closest("form").submit();
+		e.preventDefault();
+	});

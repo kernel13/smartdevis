@@ -8,7 +8,7 @@
 }
 #customer_list{
 	background-image: url('Customer_bg.jpg');
-	background-repeat: no-repeat;
+
 	
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -17,7 +17,7 @@
 }
 
 .letters{	
-	width: 95px; 
+	width: 35px; 
 	text-align: center; 
 	background-color: #eeeeee;
 	
@@ -30,7 +30,7 @@
 	border-bottom-right-radius: 5px;
 	
 	padding: 5px;
-	padding-top: 100px; 
+
 	
 	background: rgb(252,252,252); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(252,252,252,1) 5%, rgba(241,218,54,1) 100%); /* FF3.6+ */
@@ -40,25 +40,29 @@
 	background: -ms-linear-gradient(top,  rgba(252,252,252,1) 5%,rgba(241,218,54,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(252,252,252,1) 5%,rgba(241,218,54,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#f1da36',GradientType=0 ); /* IE6-9 */
-	
 
-
-	
 }
 
 
 .customer_card{
 	display: inline-block; 
-	height: 130px; 
+	height: 150px; 
 	width: 120px;
 	border: 0px solid white; 
 	padding: 10px; 
-	margin: 10px;
+	margin: 7px;
 	background: #ffffff url('paper.png') no-repeat right top;
-	
+	text-align: center;
 	-moz-box-shadow: 0 0 5px 0px #000;
 	-webkit-box-shadow: 0 0 5px 0px #000;
 	box-shadow: 0 0 5px 0px #000;
+	color: #000000;
+	font-weight: bold;	
+}
+
+.customer_card>p:first-child {
+	background-color: #f6e993;
+	height: 20px;
 }
 
 .customer_letter{

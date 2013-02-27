@@ -1,0 +1,21 @@
+
+var err = new ErrorHandler();
+
+<% if @category.errors.any? %>	
+	<% if @category.errors[:name] %>	
+		err.Add("#category_name", "<%= @category.errors[:name] %>");
+	<% end %>
+	
+	err.ShowErrors();
+<% else %>
+	err.RemoveErrors();
+	$("#newCategoryModal").modal('hide');
+
+	$("#categories").html("<%=j render '/categories/tree' %>");
+
+	$("#material_tree").jstree().on('loaded.jstree', function() {
+    		$("#material_tree").jstree('open_all');
+  	});
+
+	
+<% end %>

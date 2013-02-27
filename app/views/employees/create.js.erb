@@ -1,0 +1,24 @@
+
+var err = new ErrorHandler();
+
+<% if @employee.errors.any? %>	
+	<% if @employee.errors[:last_name] %>	
+		err.Add("#employee_last_name", "<%= @employee.errors[:last_name] %>");
+	<% end %>
+	
+	<% if @employee.errors[:first_name] %>	
+		err.Add("#employee_first_name", "<%= @employee.errors[:first_name] %>");
+	<% end %>
+	
+	
+	<% if @employee.errors[:day_price] %>	
+		err.Add("#employee_day_price", "<%= @employee.errors[:day_price] %>");
+	<% end %>
+	
+	err.ShowErrors();
+<% else %>
+	$("#employee_employee_name").closest("div.control-group").removeClass("error");
+
+	$("tbody").append("<%=j render @employee %>");
+	$("#newEmployeeModal").modal('hide') ;
+<% end %>

@@ -11,91 +11,97 @@
     </div>
   <% end %>
 
-  <div id="estimate_title">
-		<h1 class="title">Devis</h1>
-  </div>
+<%= f.hidden_field :company_id, :value => @company.id, :id => :company_id %>
 
-  <div id="company_info" style="float: left; margin: 20px;">
+  <div class="span10">
+	
+	<div class="row">
+		<div class="span6"><h1 class="title">Devis</h1></div>
+		<div class="span4"><h4><%= @estimate.created_at.strftime("%A %d %B %Y") %></h4></div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="span10">
 			<% if @company.logo %>
 				<%= image_tag @company.logo, :width => "200px;" %> 
 			<% else %>
 				<h1><%= @company.company_name %></h1>
 			<% end %>
-			
-			<%= f.hidden_field :company_id, :value => @company.id, :id => :company_id %>
-		    <br />
-		
+		</div>			
+	</div>	
+	<div class="row">						
+	  	<div class="span5">
+	  		<address>
 			<%= @company.address.address_line1 %><br />
-		 	<%= @company.address.address_line2 if @company.address.address_line2 %>
+	 		<%= @company.address.address_line2 if @company.address.address_line2 %>
 			<%= @company.address.postal_code %>, <%= @company.address.city %><br />
 			<%= @company.address.email %> <br /> <br />
+			</address>
+	
+			<span class="header">Telephone: </span> <%= @company.address.phone %> <br />
+			<span class="header">Fax: </span> <%= @company.address.fax %>	<br />			
+			<span class="header">Siret: </span> <%= @company.siret %> <br /><br />
 			
-			<div style="text-align: left;">			
-				<span class="header">Telephone: </span> <%= @company.address.phone %> <br />
-				<span class="header">Fax: </span> <%= @company.address.fax %>	<br />			
-				<span class="header">Siret: </span> <%= @company.siret %> <br /><br />
-				
-				<h3>Référence: <%= @estimate.id %></h3>
-			</div>
-  </div>
+			<h3>Référence: <%= @estimate.id %></h3>
+		</div>	
 
-  <br />
-  <h3><%= @estimate.created_at.strftime("%A %d %B %Y") %></h3>
-  <br />
-  <div id="customer_info">
-	<fieldset>
-		<legend>
-				<%= link_to "New customer", new_customer_path, :id => "new_customer_button" %><br />
-				Devis pour: <%= f.text_field :customer_name, :id => :customer_name %>
+		<div class="span5">
+			<fieldset>
+				<legend>
+						<%= t('.customer') %>: <%= f.text_field :customer_name, :id => :customer_name %>
+						<%= link_to new_customer_path, :remote => true do %>
+							<i class="icon-plus-sign" title="Créer un nouveau client"></i>
+						<% end %>								
+				</legend>
+				<%= f.hidden_field :customer_id, :id => :customer_id %>
 				
-		</legend>
-		<%= f.hidden_field :customer_id, :id => :customer_id %><br />
-		<div style="text-align: left;">
-			<span id="address" style="text-align: center;">
-				<%= @estimate.customer.address.address_line1 if @estimate.customer %><br />
-				<%= @estimate.customer.address.address_line2 if @estimate.customer %><br />
-				<%= @estimate.customer.address.postal_code if @estimate.customer %></span>,<span><%= @estimate.customer.address.city if @estimate.customer %>
-			</span><br /><br />
-			<b style="font-size: 12pt; ">Telephone: </b><span id="phone"><%= @estimate.customer.address.phone if @estimate.customer %></span> <br />
-			<b style="font-size: 12pt; ">Fax: </b> <span id="fax"><%= @estimate.customer.address.fax if @estimate.customer %></span>	<br />
-			<b style="font-size: 12pt; ">EMail: </b> <span id="email"><%= @estimate.customer.address.email if @estimate.customer %></span> <br />
+				<address>					
+					<%= @estimate.customer.address.address_line1 if @estimate.customer %><br />
+					<%= @estimate.customer.address.address_line2 if @estimate.customer %><br />
+					<%= @estimate.customer.address.postal_code if @estimate.customer %></span>,<span><%= @estimate.customer.address.city if @estimate.customer %>
+					<br />
+					<b>Telephone:</b><span id="phone"><%= @estimate.customer.address.phone if @estimate.customer %></span> <br />
+					<b>Fax: </b> <span id="fax"><%= @estimate.customer.address.fax if @estimate.customer %></span>	<br />
+					<b>EMail: </b> <span id="email"><%= @estimate.customer.address.email if @estimate.customer %></span> <br />
+				</address>
+
+			</fieldset>
+		</div>		
+	  </div>
+
+	  	<!-- Worksites -->
+		<div class="span10">
+			<p><%= link_to "Add Worksite", new_worksite_url({:estimate => @estimate.id}), :remote => true %></p>
+		
+			<%# f.fields_for :worksites %>
+		 	<p><%# f.link_to_add t('.add_a_worksite'), :worksites %></p>		
+			<%# end %>
+			
+			<%= render @worksites %>
 		</div>
-	</fieldset>
-  </div>
+	  
+	   <br style="clear: both;">
 
- <br style="clear: both;">
-	
-	<br style="clear: both;">
+	  <div style = "padding-left: 500px;">
+	  	<div style = "float: right;">
+	    	<%= f.label :total %>	
+	    	<%= f.text_field :total %>
+	  	</div>
+		<br style="clear:both;">
+	  	<div style = "float: right;">
+	    	<%= f.submit %>
+	  	</div>
+	  </div>
 
-	<div id="Worksite_form">
-		<p><%= link_to "Add Worksite", new_worksite_url({:estimate => @estimate.id}), :remote => true %></p>
-	
-		<%# f.fields_for :worksites %>
-	 	<p><%# f.link_to_add t('.add_a_worksite'), :worksites %></p>		
-		<%# end %>
+	   <br style:"clear: both" />
 		
-		<div id="dialog-add-worksite" title="Create new worksite"></div>		
-		
-		<%= render @worksites %>
-	</div>
-  
-   <br style="clear: both;">
+	<% end %>
 
-  <div style = "padding-left: 500px;">
-  	<div style = "float: right;">
-    	<%= f.label :total %>	
-    	<%= f.text_field :total %>
-  	</div>
-	<br style="clear:both;">
-  	<div style = "float: right;">
-    	<%= f.submit %>
-  	</div>
-  </div>
+</div>
 
-   <br style:"clear: both" />
-	
-<% end %>
+<!--
 
 <div id="new_customer_dialog_form">
 		<%= render "/customers/form" %>
 </div>
+-->

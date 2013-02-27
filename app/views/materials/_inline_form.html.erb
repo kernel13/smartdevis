@@ -1,0 +1,17 @@
+<td colspan="4">
+<%= form_for(@material, :remote => true) do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_field :unit_priceTF %>
+    <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, :include_blank => true %>
+    &nbsp;&nbsp;
+
+    <%= link_to "#", :id => "submit_material_inline_form_#{ @material.id }" do %>
+    	<i class="icon-ok"></i>
+    <% end %>
+
+	<%= link_to material_path(@material), :remote => true do %>
+		<i class="icon-remove"></i>
+	<% end %>
+
+<% end %>
+</td>

@@ -22,3 +22,14 @@ ul.category_tree .node
 ul.category_tree .leaf{
 		list-style-image: none;
 }
+
+ .category_tree_leaf{
+ 	display: inline-flex;
+ 	float: right;
+ 	padding-right: 30px;
+ }
+
+ .treeodd{  }
+ .treeeven{}
+
+ 

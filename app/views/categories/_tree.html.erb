@@ -1,7 +1,11 @@
-<ul class="category_tree">
-	<li class="node"> Categories - <%= link_to new_category_path do %> 	<i class="icon-plus-sign"></i> <% end %>
-		<ul>
-		<%= render @categories %>
-		</ul>
-	</li>
-</ul>
+<div id="material_tree">
+
+	<ul>
+		<li>
+			<%= link_to "categories", materials_path, :remote => true %>		
+			<ul>
+			<%= render @categories %>	
+			<ul>
+		</li>			
+	</ul>
+</div>

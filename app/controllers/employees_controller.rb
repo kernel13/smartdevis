@@ -20,6 +20,7 @@ class EmployeesController < ApplicationController
      respond_to do |format|
        format.html # show.html.erb
        format.json { render json: @employee }
+       format.js
      end
    end
 
@@ -32,6 +33,7 @@ class EmployeesController < ApplicationController
          respond_to do |format|
            format.html # new.html.erb
            format.json { render json: @employee }
+           format.js
          end
      end
 
@@ -50,9 +52,11 @@ class EmployeesController < ApplicationController
          if @employee.save
            format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
            format.json { render json: @employee, status: :created, location: @employee }
+           format.js
          else
            format.html { render action: "new" }
            format.json { render json: @employee.errors, status: :unprocessable_entity }
+           format.js           
          end
        end
      end
@@ -66,9 +70,11 @@ class EmployeesController < ApplicationController
        if @employee.update_attributes(params[:employee])
          format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
          format.json { head :no_content }
+         format.js
        else
          format.html { render action: "edit" }
          format.json { render json: @employee.errors, status: :unprocessable_entity }
+         format.js
        end
      end
    end

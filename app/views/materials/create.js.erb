@@ -1,0 +1,17 @@
+
+var err = new ErrorHandler();
+
+<% if @material.errors.any? %>	
+	<% if @material.errors[:name] %>	
+		err.Add("#material_name", "<%= @material.errors[:name] %>");
+	<% end %>
+	
+	err.ShowErrors();
+<% else %>
+	err.RemoveErrors();
+
+	$("tbody").html("<%=j render @materials %>");
+	$('tfoot td').html('<%=j paginate(@materials, :remote => true).to_s %>');
+
+	$("#newMaterialModal").modal('hide') ;
+<% end %>

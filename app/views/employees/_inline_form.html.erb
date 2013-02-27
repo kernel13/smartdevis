@@ -1,0 +1,11 @@
+
+<td colspan="4">
+<%= form_for(@employee, :html => {:class => "form-horizontal", :remote => true}) do |f| %>
+<%= f.text_field :last_name %>
+<%= f.text_field :first_name %>
+<%= f.text_field :day_price %>
+<%= f.submit :class => "btn btn-primary" %>
+<%= link_to t('back'), employee_path(@employee), :class => 'btn', :remote => true %>
+<% end %>
+</td>
+

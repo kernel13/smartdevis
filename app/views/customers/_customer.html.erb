@@ -3,6 +3,7 @@
 	
 	<p><%= customer.address.phone %>&nbsp;</p>
 	
+	<p><%= customer.address.city  %>&nbsp;<br /><%= customer.address.postal_code %>&nbsp;</p>
 	<P><%# render "/addresses/address", :address => customer if customer.address %></p>
 
 	<p><%= link_to image_tag('utilisateur.png'), customer, :remote => true %>

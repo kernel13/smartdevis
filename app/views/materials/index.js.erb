@@ -1,3 +1,16 @@
 
 $("#materials tbody").html("<%=j render @materials %>")
 $('#materials tfoot').html('<tr><td colspan="6"><%=j paginate(@materials, :remote => true).to_s %></td></td>');
+
+$("#materials tr").on("mouseover", function(){
+	$(this).css("cursor", "pointer")
+});
+
+$("#materials tr").on("click",function(){
+	var id = $(this).find("input").val();
+
+	
+	$(this).attr("href", "/materials/" + id + "/edit");
+	$(this).attr("method", "GET");
+	$.rails.handleRemote( $(this) );
+});

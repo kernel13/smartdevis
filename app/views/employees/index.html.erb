@@ -1,34 +1,23 @@
 <% content_for :title do %>
-	<h1><%= t('.list_employees')%></h1>
+	<h2 class="title"><%= t('.list_employees')%></h2>
 <% end %>
 
 <% content_for :pageMenu do %>
-	<%= link_to new_employee_path, :class => "btn btn-inverse" do %>
+	<%= link_to new_employee_path, :class => "btn btn-inverse", :remote => true do %>
 		<i class="icon-plus">&nbsp;&nbsp;<%= t('.new_employee') %></i> 
 	<% end %>
 <% end %>
 
-<table class="table">
+<table id="employees" class="table table-hover">
   <thead>
   <tr>
     <td><%= t('.last_name') %></td>
     <td><%= t('.first_name') %></td>
     <td><%= t('.day_price') %></td>
     <td></td>
-    <td></td>
-    <td></td>
   </tr>
   </thead>
-<% @employees.each do |employee| %>
   <tbody>
-  <tr>
-    <td><%= employee.last_name %></td>
-    <td><%= employee.first_name %></td>
-    <td><%= employee.day_price %></td>
-    <td><%= link_to t('show'), employee %></td>
-    <td><%= link_to t('edit'), edit_employee_path(employee) %></td>
-    <td><%= link_to t('destroy'), employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+	<%= render @employees %>
   </tbody>
-<% end %>
 </table>

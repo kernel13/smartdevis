@@ -11,13 +11,13 @@
 
 <div id="customer" class="container span9">
 	<div id="customer_list" class="row">
-		<div id="customers" class="span7" >
+		<div id="customers" class="span8">
 
 			<%= render @customers %>
 
 		</div>
 
-		<div class="span1 letters">
+		<div id="div_letter" class="span1 letters">
 			<div class = "badge badge-inverse">
 				<%= link_to customers_path, :remote => true do %>
 					<i class="icon-th"></i>

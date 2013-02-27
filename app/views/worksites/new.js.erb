@@ -1,4 +1,4 @@
 
-$("#dialog-add-worksite").empty();
-$("#dialog-add-worksite").append("<%= j render('form') %>")
-$("#dialog-add-worksite").dialog( "open" );
+$("#newWorksiteModal").remove();
+$(document.body).append("<%=j render('new') %>")
+$("#newWorksiteModal").modal();
