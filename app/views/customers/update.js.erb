@@ -1,0 +1,15 @@
+
+var err = new ErrorHandler();
+
+<% if @customer.errors.any? %>	
+	<% if @customer.errors[:customer_name] %>	
+		err.Add("#customer_customer_name", "<%= @customer.errors[:customer_name] %>");
+		err.ShowErrors();
+	<% end %>
+<% else %>
+	$("#customer_customer_name").closest("div.control-group").removeClass("error");
+
+	$("#card_<%= @customer.id %>").replaceWith("<%=j render @customer %>");
+
+	$("#editCustomerModal").modal('hide') ;
+<% end %>
