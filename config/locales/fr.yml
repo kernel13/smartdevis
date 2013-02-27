@@ -3,6 +3,7 @@ fr:
     show: "Afficher"
     back: "Retour"
     edit: "Editer"
+    cancel: "Annuler"
     destroy: "Supprimer"
     helpers:
         submit:
@@ -129,8 +130,12 @@ fr:
             new_employee: "Nouvel employé"
             cancel: "Annuler"
     customers:
+        index:
+            new_customer: "Créer un client"
+        new:
+            new_customer: "Fiche Client"
         edit:
-            edit_customer: "Modifier un client"          
+            edit_customer: "Fiche client"          
         customer:
             last_name: "Nom"
             first_name: "Prénom"
@@ -146,6 +151,8 @@ fr:
             category: "Categorie"
             new_material: "Nouveau matériel"
             new_category: "Nouvelle categorie"
+        new:
+            new_material: "Nouveau matériel"
     categories:
         index:
             name: "Nom"

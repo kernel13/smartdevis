@@ -54,6 +54,12 @@ class CustomersController < ApplicationController
    def edit
      @customer = current_account.company.customers.find(params[:id])
      @customer.address = Address.new unless @customer.address
+
+      respond_to do |format|
+           format.html # new.html.erb
+           format.json { render json: @customer }
+           format.js
+         end
    end
 
    # POST /customers
@@ -84,9 +90,11 @@ class CustomersController < ApplicationController
        if @customer.update_attributes(params[:customer])
          format.html { redirect_to @customer, notice: 'customer was successfully updated.' }
          format.json { head :no_content }
+         format.js
        else
          format.html { render action: "edit" }
          format.json { render json: @customer.errors, status: :unprocessable_entity }
+         format.js
        end
      end
    end

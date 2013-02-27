@@ -34,7 +34,8 @@
 
   <div class="control-group">
     <div class="controls">
-    <%= f.submit %>
+      <%= f.submit :class => "btn btn-primary" %>
+      <%= link_to t('cancel'), :back, :class => 'btn', :remote => true, :'data-dismiss' => "modal" %>
     </div>  
   </div>
 <% end %>

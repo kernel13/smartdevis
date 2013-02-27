@@ -1,4 +1,4 @@
-<div class = "customer_card">
+<div id="card_<%= customer.id %>" class = "customer_card">
 	<p><%= customer.customer_name %></p>
 	
 	<p><%= customer.address.phone %>&nbsp;</p>
@@ -7,6 +7,6 @@
 	<P><%# render "/addresses/address", :address => customer if customer.address %></p>
 
 	<p><%= link_to image_tag('utilisateur.png'), customer, :remote => true %>
-	<%= link_to image_tag('utilisateur_editer.png'), edit_customer_path(customer) %>
+	<%= link_to image_tag('utilisateur_editer.png'), edit_customer_path(customer), :remote => true %>
 	<%= link_to image_tag('utilisateur_supprimer.png'), customer, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 </div>
