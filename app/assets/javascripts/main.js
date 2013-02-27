@@ -19,11 +19,17 @@ $(function(){
 
 	$("#material_tree").jstree({
 			"plugins" : [ "themes", "html_data", "ui", "crrm", "contextmenu" ],
+			themes: {
+        		"theme": "default",
+        		"dots": true,
+        		"icons": true,
+        		"url": "/assets/themes/default/style.css"
+      		},
 			contextmenu: {
 				items: {
 				ccp: false
 				}
-			}
+			}	
 		})
 		.on('loaded.jstree', function() {
     		$("#material_tree").jstree('open_all');
