@@ -514,26 +514,22 @@ Worksite = function(objWorksite) {
 		$("#Worksite_form").append(html);
 	}
 
-	this.AddMaterial = function(material){
-		this.__materials.push(material);
-	}
-
 	this.CreateMaterial = function(id) {
-		delete this.__materials[id];
+		this.__materials[id] = new Material();
 	}
 
 	this.RemoveMaterial = function(id){
 		delete this.__materials[id];
 		that.UpdateTotal();
+	}	
+
+	this.CreateEmployee = function(id){
+		this.__employees[id] = new Employee();		
 	}
 
 	this.RemoveEmployee = function(id){
 		delete this.__employees[id];
 		that.UpdateTotal();
-	}
-
-	this.CreateEmployee = function(id){
-		this.__employees[id] = new Employee();		
 	}
 
 	this.UpdateTotal = function () {
