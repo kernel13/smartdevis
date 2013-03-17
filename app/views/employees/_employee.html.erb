@@ -2,6 +2,6 @@
 	<%= hidden_field_tag "employee_#{employee.id}", employee.id %>
     <td><%= employee.last_name %></td>
     <td><%= employee.first_name %></td>
-    <td><%= employee.day_price %></td>
+    <td><%= number_to_currency(employee.day_price) %></td>
     <td><%= link_to t('destroy'), employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </tr>

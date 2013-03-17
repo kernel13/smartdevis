@@ -3,7 +3,7 @@
   <tr id="material_<%= material.id %>">
 	<%= hidden_field_tag "material_#{material.id}", material.id %>
     <td><%= material.name %></td>
-    <td><%= material.unit_priceTF %></td>
+    <td><%= number_to_currency(material.unit_priceTF) %></td>
     <td><%= material.category.name if material.category %></td>
     <td>
 		<%= link_to edit_material_path(material), :title => "Editer" do %>
