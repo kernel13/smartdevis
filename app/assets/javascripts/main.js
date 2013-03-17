@@ -11,7 +11,6 @@ $(function(){
 	$("#materials tr").on("click",function(){
 		var id = $(this).find("input").val();
 	
-		
 		$(this).attr("href", "/materials/" + id + "/edit");
 		$(this).attr("method", "GET");
 		$.rails.handleRemote( $(this) );
@@ -109,6 +108,7 @@ $(function(){
 	$("#employees tr").on("mouseover", function(){
 		$(this).css("cursor", "pointer")
 	});
+	
 	$("#employees tr").on("click",function(){
 		var id = $(this).find("input").val();
 	
@@ -502,17 +502,6 @@ Worksite = function(objWorksite) {
 		that.UpdateTotal();
 	});
 
-
-	// Method AddWorksite
-	// 		Update an estimate and add a woorksite to it
-	this.AddWorksite = function(){	
- 		var html = "<p style='text-align: left; font-size: 18px;'>" +
-				   "<span style='font-weight: bold; text-decoration: underline;'>Motif: </span>" + that.__reason + "</p>" +
-				   "<p style='text-align: left;'><span style='font-weight: bold;'>Description: </span>" + that.__description + "</p>"		
-				
-				
-		$("#Worksite_form").append(html);
-	}
 
 	this.CreateMaterial = function(id) {
 		this.__materials[id] = new Material();
