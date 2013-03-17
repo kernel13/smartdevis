@@ -1,0 +1,19 @@
+<% content_for :title do %>
+	<%= link_to image_tag("maison_48.png", :title => "accueil"), account_home_index_path %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Total:</b>
+  <%= @resource.total %>
+</p>
+
+<p>
+  <b>Nb days:</b>
+  <%= @resource.nb_days %>
+</p>
+
+
+<%= link_to 'Edit', edit_estimate_path(@resource) %> |
+<%= link_to 'Back', estimates_path %>

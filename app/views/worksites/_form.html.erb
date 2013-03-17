@@ -11,34 +11,54 @@
       </ul>
     </div>
   <% end %>
-<%= f.hidden_field :estimate_id, :value => @worksite.estimate_id %>
-  <div id="reason" class="field">
-    <%= f.label :reason %><br />
+<%= f.hidden_field :statement_id, :value => @worksite.statement_id %>
+
+  <div id="reason" class="control-group">
+    <%= f.label :reason, :class => "control-label" %>
     <%= f.text_field :reason %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
+
+  <div id="description" class="control-group">
+    <%= f.label :description, :class => "control-label" %>
+    <div class="controls">
     <%= f.text_area :description %>
-  </div>
-  <div id="work_start" class="field">
-    <%= f.label :work_start_on %><br />
-    <%= f.text_field :work_start_on %>
-  </div>
-  <div id="work_end" class="field">
-    <%= f.label :work_end_on %><br />
-    <%= f.text_field :work_end_on %>
+    </div>
   </div>
 
+  <div id="work_start" class="control-group">
+    <%= f.label :work_start_on, :class => "control-label" %>
+    <div class="controls">
+    <%= f.text_field :work_start_on, :value => @worksite.work_start_on ? l(@worksite.work_start_on) : nil %>
+    </div>
+  </div>
 
+  <div id="work_end" class="control-group">
+    <%= f.label :work_end_on, :class => "control-label" %>
+    <div class="controls">
+    <%= f.text_field :work_end_on, :value => @worksite.work_end_on ? l(@worksite.work_end_on) : nil %>
+    </div>
+  </div>
+
+  <!--  MATERIALS -->
+  <hr />
   <%= f.fields_for :items do |item_field| %>
-		<%= render "/worksites/item_fields", :f => item_field %>
+		<%= render "/materials/item_fields", :f => item_field %>
   <% end %>
-
 
   <p><%= f.link_to_add t('.add_a_material'), :items %></p>
 
+  <!-- EMPLOYEES -->
+  <hr />
+  <%= f.fields_for :employee_tasks do |item_field| %>
+    <%= render "/employees/item_fields", :f => item_field %>
+  <% end %>
+
+
+  <p><%= f.link_to_add t('.add_an_employee'), :employee_tasks %></p>
+
 
   <div class="actions">
-    <%# f.submit %>
+      <%= f.submit :class => "btn btn-primary" %>
+      <%= link_to t('cancel'), :back, :class => 'btn', :remote => true, :'data-dismiss' => "modal" %>
   </div>
 <% end %>

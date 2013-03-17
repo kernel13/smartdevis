@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "estimates/show" do
   before(:each) do
-    @estimate = assign(:estimate, stub_model(Estimate,
+    @resource = assign(:estimate, stub_model(Estimate,
       :total => "9.99",
       :nb_days => 1
     ))

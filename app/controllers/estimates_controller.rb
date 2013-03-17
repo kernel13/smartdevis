@@ -1,49 +1,64 @@
-class EstimatesController < InheritedResources::Base
-  before_filter :authenticate_account!
-  
-  #Index action
+class EstimatesController < StatementsController
+  defaults :resource_class => Estimate, :collection_name => 'resources', :instance_name => 'resource'
+
+#Index action
   def index
-    @estimates = Estimate.page(params[:page]).per(15)
+    @resources = Estimate.page(params[:page]).per(15)
     
     index!
   end
   
+    def show
+    @resource = Estimate.find(params[:id])
+    
+    respond_to do |format|
+        format.html
+        format.pdf do
+          pdf = StatementPdf.new(@resource, view_context)
+          send_data pdf.render, filename: "estimate_#{@resource.id}.pdf",
+                                type: "application/pdf",
+                                disposition: "inline"                          
+        end
+    end
+  end
+
   def edit
       @company = current_account.company
-      @estimate = Estimate.find(params[:id])
-      @worksites = @estimate.worksites
-      @customer = @estimate.customer || Customer.new
-      @customer.address ||= Address.new  
-           
+      @resource = Estimate.find(params[:id])
+      @worksites = @resource.worksites
+      @customer = @resource.customer || Customer.new
+      @customer.address ||= Address.new        
+      @resource.customer = @customer
+
       edit!
   end
   
   def update
-    @estimate = current_account.company.estimates.find(params[:id])
+    @resource = current_account.company.estimates.find(params[:id])
     
     respond_to do |format|
-        if @estimate.update_attributes(params[:estimate])
+        if @resource.update_attributes(params[:estimate])
           format.html { redirect_to estimates_url, notice: 'estimate was successfully updated' }
-          format.json { render json: @estimate, status: :created, location: @estimate }
+          format.json { render json: @resource, status: :created, location: @resource }
         else
           format.html { render action: "edit" }
-          format.json { render json: @estimate.errors, status: :unprocessable_entity }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
     end
   end
   
   #new Action
   def new
-      @estimate = Estimate.new
-      @estimate.company_id = current_account.company.id
-      
+      @resource = Estimate.new
+      @resource.company_id = current_account.company.id
+
       respond_to do |format|
-        if @estimate.save
-          format.html { redirect_to edit_estimate_path(@estimate), notice: 'estimate was successfully created.' }
-          format.json { render json: @estimate, status: :created, location: @estimate }
+        if @resource.save
+          format.html { redirect_to edit_estimate_path(@resource), notice: 'estimate was successfully created.' }
+          format.json { render json: @resource, status: :created, location: @resource }
         else
           format.html { render action: "index" }
-          format.json { render json: @estimate.errors, status: :unprocessable_entity }
+          format.json { render json: @resource.errors, status: :unprocessable_entity }
         end
       end
   end
@@ -51,17 +66,16 @@ class EstimatesController < InheritedResources::Base
   # POST /estimates
   # POST /estimates.json
   def create
-    @estimate = Estimate.new(params[:estimate])
+    @resource = Estimate.new(params[:estimate])
 
     respond_to do |format|
-      if @estimate.save
+      if @resource.save
         format.html { redirect_to estimates_url, notice: 'estimate was successfully created.' }
-        format.json { render json: @estimate, status: :created, location: @estimate }
+        format.json { render json: @resource, status: :created, location: @resource }
       else
         format.html { render action: "new" }
-        format.json { render json: @estimate.errors, status: :unprocessable_entity }
+        format.json { render json: @resource.errors, status: :unprocessable_entity }
       end
     end
   end
-  
 end

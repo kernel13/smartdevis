@@ -1,0 +1,25 @@
+
+
+var err = new ErrorHandler();
+
+<% if @worksite.errors.any? %>	
+	<% if @worksite.errors[:reason] %>	
+		err.Add("#worksite_reason", "<%= @worksite.errors[:reason] %>");
+	<% end %>
+	
+	<% if @worksite.errors[:work_start_on] %>	
+		err.Add("#worksite_work_start_on", "<%= @worksite.errors[:work_start_on] %>");
+	<% end %>
+	
+	
+	<% if @worksite.errors[:work_end_on] %>	
+		err.Add("#worksite_work_end_on", "<%= @worksite.errors[:work_end_on] %>");
+	<% end %>
+	
+	err.ShowErrors();
+<% else %>
+	$("#worksites").append("<%=j render @worksite %>");
+
+	$("#newWorksiteModal").modal('hide') ;
+<% end %>
+

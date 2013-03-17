@@ -7,6 +7,7 @@ $(function(){
 	$("#materials tr").on("mouseover", function(){
 		$(this).css("cursor", "pointer")
 	});
+
 	$("#materials tr").on("click",function(){
 		var id = $(this).find("input").val();
 	
@@ -126,11 +127,14 @@ $(function(){
 		originalelpos = el.offset();
 	
     $(window).scroll(function () {
-         var el = $('#div_letter'); // important! (local)
-         var elpos = el.offset().top; // take current situation
-         var windowpos = $(window).scrollTop();
-         var finaldestination = windowpos + originalelpos;
-         el.stop().animate({ 'margin-top': windowpos }, 200);
+    	 var elpos;
+
+	     var el = $('#div_letter'); // important! (local)
+	     if(el.offset() != undefined)
+	     	elpos = el.offset().top; // take current situation
+	     var windowpos = $(window).scrollTop();
+	     var finaldestination = windowpos + originalelpos;
+	     el.stop().animate({ 'margin-top': windowpos }, 200);
     });
 
 	 $(".badge a").click(function(){
@@ -198,17 +202,8 @@ $(function(){
 	$("#menu img").hover(
 		function(){ this.src = this.src.replace(96, 128); },
 		function(){ this.src = this.src.replace(128, 96); }
-	);
+	);	
 	
-	//
-	//			Worksite
-	//
-	var w = new Worksite();
-	
-	//
-	// 			Material 
-	//
-	var m = new Material();
 	
 	//
 	// 			Customers
@@ -223,80 +218,291 @@ $(function(){
 });
 
 
+// -------------------------------------------
+//	Class: GUID
+// -------------------------------------------
+GUID = function(){
+
+	 this.Rand = function() {
+	   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+	 }
+
+	 this.guid = function() {
+	   return (this.Rand()+this.Rand()+"-"+this.Rand()+"-"+this.Rand()+"-"+this.Rand()+"-"+this.Rand()+this.Rand()+this.Rand());
+	 }
+
+}
+
+GUID.NewId = function(){
+	return new GUID().guid();	
+}
+
+// -------------------------------------------
+//	Class AutoCompleteParser
+// -------------------------------------------
+AutoCompleteParser = function(dom, uri, funcSource, funcSelect){ 
+
+	$("body").on("keydown.autocomplete", dom, function(){
+		
+		$(this).autocomplete({
+		            source: function(request, response){
+						$.getJSON(uri, function(data){
+								var tags = $.map(data, function(a){ 
+									return funcSource(a);
+								});
+						 		var matcher = new RegExp($.ui.autocomplete.escapeRegex( request.term ), "i" );
+						        response( $.grep( tags, function( item ){
+						                return matcher.test( item.label );
+						            }) );
+
+						});
+					},
+					select: function(event, ui){
+							funcSelect(this, ui);
+
+							return false;				 
+					}
+			
+			
+		});	
+
+	});
+}
+
+AutoCompleteParser.Activate = function(dom, uri, funcSource, funcSelect){
+	return new AutoCompleteParser(dom, uri, funcSource, funcSelect);
+}
+
+//------------------------------------------------
+//	Class: Attribute
+//		Constructor
+//------------------------------------------------
+Attribute = function(field, model){
+	this.__field = field;
+	this.__guid = GUID.NewId();
+
+	if($(this.__field).closest("tr").attr("id"))
+		this.__id = $(this.__field).closest("tr").attr("id");
+	else
+  		this.__id = model + "_" + this.__guid;
+  		
+	this.GetID= function(){ 
+		try
+		{
+			return this.__field.find("tr").attr("id");
+		}
+		catch(err)
+		{
+			if(err == "TypeError: this.__field.find is not a function")
+				return $(this.__field).closest("tr").attr("id");
+		}
+	}
+
+	this.SetID = function(){
+		this.__field.find("tr").attr("id", this.__id);
+	}
+
+	this.GetType = function (field) {
+		return this.__field.find("tr").attr("type");
+	}
+}
+
+Attribute.ID = function (field) {
+	return new Attribute(field).GetID();
+}
+
+Attribute.Type = function(field){
+	return new Attribute(field).GetType();
+}
+
 //------------------------------------------------
 //	Class: Worksite
 //		Constructor
 //		Method:
 //			AddWorksite(): Add dynamically a worksite to an estimate
 //------------------------------------------------
-Worksite = function(reason, description, workSiteStartOn, workSiteEndOn) {
+Worksite = function(objWorksite) {
 	var that = this;
-	this.__reason = reason;
-	this.__description = description;
-	this.__workSiteStartOn = workSiteStartOn;
-	this.__workSiteEndOn = workSiteEndOn;
-		
+	this.__reason;
+	this.__description;
+	this.__workSiteStartOn;
+	this.__workSiteEndOn;
+	this.__Total = 0;
+
+	this.__materials = new Array();
+	this.__employees = new Array();		
+
 	// Date Picker
-	$("#work_start input").live('click', function() { 
+	$("#worksite_work_start_on").on('click', function() { 		
 		$(this).datepicker({showOn: 'focus'}).focus(); 
 	});	
 	
-	$("#work_end input").live('click', function() { 
+	$("#worksite_work_end_on").on('click', function() { 
 		$(this).datepicker({showOn: 'focus'}).focus(); 
 	});
 
+
 	// Worksite Dialog
-	$( "#dialog-add-worksite" ).dialog({
-      autoOpen: false,
-      height: 450,
-      width: 650,
-      modal: true,
-      buttons: {
-        Save: function() {
+	// $( "#dialog-add-worksite" ).dialog({
+ //      autoOpen: false,
+ //      height: 450,
+ //      width: 650,
+ //      modal: true,
+ //      buttons: {
+ //        Save: function() {
 	
-			$("#dialog-add-worksite form").submit();
+	// 		$("#dialog-add-worksite form").submit();
 			
-			that.__reason = $("#worksite_reason").val();
-			that.__description = $("#worksite_description").val();			
-			that.__workSiteStartOn = $("#worksite_work_start_on").val();
-			that.__workSiteEndOn = $("#worksite_work_end_on").val();
+	// 		that.__reason = $("#worksite_reason").val();
+	// 		that.__description = $("#worksite_description").val();			
+	// 		that.__workSiteStartOn = $("#worksite_work_start_on").val();
+	// 		that.__workSiteEndOn = $("#worksite_work_end_on").val();
 			
-			that.AddWorksite();
+	// 		that.AddWorksite();
 			
-			$( this ).dialog( "close" );
+	// 		$( this ).dialog( "close" );
 		
-		 /*
-          var bValid = true;
-          allFields.removeClass( "ui-state-error" );
+		 
+ //          var bValid = true;
+ //          allFields.removeClass( "ui-state-error" );
 
-          bValid = bValid && checkLength( name, "username", 3, 16 );
-          bValid = bValid && checkLength( email, "email", 6, 80 );
-          bValid = bValid && checkLength( password, "password", 5, 16 );
+ //          bValid = bValid && checkLength( name, "username", 3, 16 );
+ //          bValid = bValid && checkLength( email, "email", 6, 80 );
+ //          bValid = bValid && checkLength( password, "password", 5, 16 );
 
-          bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
-          // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
-          bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
-          bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+ //          bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
+ //          // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+ //          bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
+ //          bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
 
-          if ( bValid ) {
-            $( "#users tbody" ).append( "<tr>" +
-              "<td>" + name.val() + "</td>" + 
-              "<td>" + email.val() + "</td>" + 
-              "<td>" + password.val() + "</td>" +
-            "</tr>" ); 
-            $( this ).dialog( "close" );
-          }
-		*/
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-      close: function() {
-        allFields.val( "" ).removeClass( "ui-state-error" );
-      }
-    });
+ //          if ( bValid ) {
+ //            $( "#users tbody" ).append( "<tr>" +
+ //              "<td>" + name.val() + "</td>" + 
+ //              "<td>" + email.val() + "</td>" + 
+ //              "<td>" + password.val() + "</td>" +
+ //            "</tr>" ); 
+ //            $( this ).dialog( "close" );
+ //          }
+		
+ //        },
+ //        Cancel: function() {
+ //          $( this ).dialog( "close" );
+ //        }
+ //      },
+ //      close: function() {
+ //        allFields.val( "" ).removeClass( "ui-state-error" );
+ //      }
+ //    });
+
+	// Bind added field to corresponding object
+	$(document).on('nested:fieldAdded', function(event){		
+  		// this field was just inserted into your form
+  		var field = event.field;   	
+  		
+  		switch(Attribute.Type(field)){
+  			case "material":
+  				var attr = new Attribute(field, "material");
+  				attr.SetID();  				
+  				that.CreateMaterial(attr.GetID());
+
+  				break;
+  			case "employee":
+  				var attr = new Attribute(field, "employee");
+  				attr.SetID();  				
+  				that.CreateEmployee(attr.GetID());
+
+  				break;
+  		}
+
+  		// it's a jQuery object already! Now you can find date input
+  		//var dateField = field.find('.date');
+  		// and activate datepicker on it
+  		//dateField.datepicker();
+	});
+
+	$(document).on('nested:fieldRemoved', function(event){
+		var field = event.field;   	
+  		switch(Attribute.Type(field)){
+  			case "material":
+  				var id = field.find("tr").attr("id");
+  				that.RemoveMaterial(id);
+  				break;
+  			case "employee":
+  				var id = field.find("tr").attr("id");
+  				that.RemoveEmployee(id);
+  				break;
+  		}
+	});
+
+
+	AutoCompleteParser.Activate("input.material_label", '/materials',
+		function(a){
+			return {
+				value: a.id, 
+				label: a.name,
+				unit_price: a.unit_priceTF,
+				category: a.category_id
+			}
+		},
+		function(dom, ui){
+			$(dom).val(ui.item.label); 					 						
+			$(dom).siblings(".material_value").val(ui.item.value); 	
+			$(dom).siblings(".material_unit_price_tf").val(ui.item.unit_price); 	
+
+			var id = Attribute.ID(dom); 			
+			that.__materials[id].UnitPrice(ui.item.unit_price);
+		});
+
+
+	$("body").on("change", "input.material_quantity", function(){		
+		var id = $(this).closest("tr").attr("id");
+		that.__materials[id].Quantity($(this).val());
+		that.__materials[id].UpdateTotal(this);
+
+		that.UpdateTotal();
+	});
+
+	$("body").on("change", "input.material_tva", function(){
+		var id = $(this).closest("tr").attr("id");
+		that.__materials[id].Tva($(this).val());
+		that.__materials[id].UpdateTotal(this);
+
+		that.UpdateTotal();
+	});
 	
+
+	AutoCompleteParser.Activate("input.employee_name", '/employees',
+		function(a){
+			return {
+					value: a.id, 
+					label: a.first_name + " " + a.last_name,
+					price: a.day_price		
+			}
+		},
+		function(dom, ui){
+			$(dom).val(ui.item.label); 					 						
+			$(dom).siblings(".employee_value").val(ui.item.value); 	
+			$(dom).parent("td").next().find("input").val(ui.item.price);
+
+			var id = Attribute.ID(dom); 			
+			that.__employees[id].Price(ui.item.price);
+		});
+
+	$("body").on("change", "input.employee_nb_jour", function(){
+		var id = $(this).closest("tr").attr("id");
+		that.__employees[id].NbJour($(this).val());
+
+		that.UpdateTotal();
+	});
+
+	$("body").on("click", "input.employee_half_day", function(){		
+		var id = $(this).closest("tr").attr("id");				
+		that.__employees[id].HalfDay($(this).is(":checked"));
+
+		that.UpdateTotal();
+	});
+
+
 	// Method AddWorksite
 	// 		Update an estimate and add a woorksite to it
 	this.AddWorksite = function(){	
@@ -307,20 +513,179 @@ Worksite = function(reason, description, workSiteStartOn, workSiteEndOn) {
 				
 		$("#Worksite_form").append(html);
 	}
+
+	this.AddMaterial = function(material){
+		this.__materials.push(material);
+	}
+
+	this.CreateMaterial = function(id) {
+		delete this.__materials[id];
+	}
+
+	this.RemoveMaterial = function(id){
+		delete this.__materials[id];
+		that.UpdateTotal();
+	}
+
+	this.RemoveEmployee = function(id){
+		delete this.__employees[id];
+		that.UpdateTotal();
+	}
+
+	this.CreateEmployee = function(id){
+		this.__employees[id] = new Employee();		
+	}
+
+	this.UpdateTotal = function () {
+		this.__total = 0;
+		for(var m in this.__materials){
+			this.__total = this.__total + this.__materials[m].Total();
+		}
+
+		for(var e in this.__employees){
+			this.__total = this.__total + this.__employees[e].Total();
+		}
+
+		$("#worksite_total span.value").text(this.__total.toFixed(2));
+	}
+
+
+	// If an object is given to the construcotr then it is initialized with it
+	if(objWorksite)
+	{
+		this.__reason = objWorksite.reason;
+		this.__description = objWorksite.description;
+		this.__workSiteStartOn = objWorksite.work_start_on;
+		this.__workSiteEndOn = objWorksite.work_end_on;
+
+		for(var w in objWorksite.items){
+			this.__materials["material_" + objWorksite.items[w].material_id] = new Material(objWorksite.items[w]);
+		}
+
+		for(var e in objWorksite.employee_tasks){			
+			this.__employees["employee_" + objWorksite.employee_tasks[e].employee_id] = new Employee(objWorksite.employee_tasks[e]);
+		}
+
+		this.UpdateTotal();
+	}
 }
+
 
 //------------------------------------------------
 //	Class: Material
 //------------------------------------------------
-Material = function(){
+Material = function(material){
+	var that = this;
 
-	$(".material_label").live("keydown.autocomplete", function(){
+	this.__unit_priceTF = 0;
+	this.__quantity = 0;
+	this.__tva = 0;
+	this.__total = 0;	
 
+
+	this.UnitPrice = function (value) {
+		if(value)
+			this.__unit_priceTF	= value;
+		else
+			return this.__unit_priceTF;
+	}
+
+	this.Total = function () {
+		return this.__total;
+	}
+
+	this.Quantity = function (value) {
+		if(value)
+			this.__quantity = value;
+		else
+			return this.__quantity;
+	}
+
+	this.Tva = function (value){
+		if(value)
+			this.__tva = value;
+		else
+			return this.__tva;
+	}
+
+	this.UpdateTotal = function(e)
+	{
+		// Update total price
+		this.__total = this.__unit_priceTF * this.__quantity + (((this.__unit_priceTF * this.__quantity) * this.__tva) / 100);
+		
+		$(e).parent("td").siblings(".material_totalTF").find("input").val(this.__total.toFixed(2));	
+	}
+
+
+	if(material)
+	{	
+		this.__unit_priceTF = material.material.unit_priceTF;
+		this.__quantity = material.quantity;
+		this.__tva = material.tva;
+
+		this.UpdateTotal();
+	}
+}
+
+
+//------------------------------------------------
+//	Class: Employee
+//	Constructor:
+//
+//	Method:
+//------------------------------------------------
+Employee = function(employee){
+	this.__price = 0;
+	this.__nb_day = 0;
+	this.__half_day = false;
+
+	if(employee)
+	{
+		this.__price = employee.employee.day_price;
+		this.__nb_day = employee.nb_day;
+		this.__half_day = employee.half_day;
+	}
+
+	this.Price = function (value) {
+		if(value)
+			this.__price = value;
+		else
+			return this.__price;
+	}
+
+	this.NbJour = function (value) {
+		if(value)
+			this.__nb_day = value;
+		else
+			return this.__nb_day;
+	}
+	
+	this.HalfDay = function (value) {
+		if(value != undefined)
+			this.__half_day = value;
+		else
+			return this.__half_day;
+	}
+
+    this.Total = function () {
+    	var nbday = this.__nb_day;
+    	if(this.__half_day)
+    		nbday = this.__nb_day / 2;
+
+    	return (this.__price * nbday);
+    }
+/*
+	$("body").on("keydown.autocomplete", "input.employee_name", function(){
 		$(this).autocomplete({
 		            source: function(request, response){
-						$.getJSON('/materials', function(data){
-								var tags = $.map(data, function(a){ return {value: a.id, label: a.name} });
-						 		var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+						$.getJSON('/employees', function(data){
+								var tags = $.map(data, function(a){ return {
+										value: a.id, 
+										label: a.first_name + " " + a.last_name,
+										price: a.day_price										
+									}
+								});
+						 		var matcher = new RegExp($.ui.autocomplete.escapeRegex( request.term ), "i" );
 						        response( $.grep( tags, function( item ){
 						                return matcher.test( item.label );
 						            }) );
@@ -328,8 +693,9 @@ Material = function(){
 						});
 					},
 					select: function(event, ui){
-							$(".material_label").last().val(ui.item.label); 					 						
-							$(".material_value").last().val(ui.item.value); 	
+							$(this).val(ui.item.label); 					 						
+							$(this).siblings(".employee_value").val(ui.item.value); 	
+							$(this).parent("td").next().find("input").val(ui.item.price);
 							return false;				 
 					}
 			
@@ -337,9 +703,9 @@ Material = function(){
 		});	
 
 	});
+*/
 
 }
-
 
 //------------------------------------------------
 //	Class: Customers
@@ -455,15 +821,25 @@ Customer = function(data, address){
 		return this.__address;	
 	}
 	
-	this.UpdateField = function(){
-		//alert("ok");
+	this.UpdateField = function(){		
 		$("#customer_name").val(this.__name);
 		$("#customer_id").val(this.__id);
-		this.__address.AddressLine1() != null ? $("#address").text(this.__address.AddressLine1()) : $("#address").text("");
+
+		var address = this.__address.AddressLine1() + "<br />" +
+					  this.__address.AddressLine2() + "<br />" + 
+					  "<b>Téléphone:</b> " + this.__address.Phone() + "<br />" + 
+					  "<b>Fax:</b> " + this.__address.Fax() + "<br />" + 
+					  "<b>EMail:</b> " + this.__address.EMail();
+
+		$("address:last-child").html(address);
+
+		/*
+		this.__address.AddressLine1() != null ? $("address").text(this.__address.AddressLine1()) : $("address").text("");
 		this.__address.AddressLine2() != null ? $("#address").text($("#address").text () + " " + this.__address.AddressLine2()) : $("#address").text("");
 		this.__address.Phone() != null ? $("#phone").text(this.__address.Phone()) : $("#phone").text("");
 		this.__address.Fax() != null ? $("#fax").text(this.__address.Fax()) : $("#fax").text("");
 		this.__address.EMail() != null ? $("#email").text(this.__address.EMail()) : $("#email").text("");
+		*/
 	}
 }
 
@@ -500,7 +876,7 @@ Address = function(address){
 	}
 	
 	this.Fax = function(){
-		return this.__fax;
+		return this.__fax || "";
 	}
 	
 	this.EMail = function(){

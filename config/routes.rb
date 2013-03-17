@@ -4,13 +4,13 @@ Smartdevis::Application.routes.draw do
   get "dashboard/index", :as => "dashboard"
   delete "companies/logo", :to => "companies#delete_logo", :as => "delete_logo"
   
-  resources :estimates
-
+  resources :statements, :estimates, :invoices
   match "customers/:letter", :to => "customers#index", :constraints => { :letter => /[a-zA-Z]/ }
   match "materials/category/:category", :to => "materials#index", :as => :material_category, :constraints => { :category => /.*/ }
 
   resources :materials, :categories, :worksites,  :customers, :employees
-
+  resources :employee_tasks
+  
   devise_for :accounts
 
   ActiveAdmin.routes(self)

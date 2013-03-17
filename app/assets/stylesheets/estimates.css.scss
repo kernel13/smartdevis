@@ -123,21 +123,31 @@ h1.title{
 #estimate_listing{
 	margin: 30px auto;
 	width: 700px;
-	border: solid black 2px;
-	border-color: #9b9da2;
+	border: solid black 0px;
+	border-color: #4f758a;
+
+	/*
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
+	*/
 }
 
-#estimate_listing th{
-	fond-weight: bold;
-	background-color: #9b9da2;
+#estimate_listing th{	
+	background-color: #4f758a;
 	padding: 0;
-	border-width: 0;
-	padding: 10px 10px;
-	color: #e5e8ef;
+	border: solid 1px white;
+	padding: 2px 10px;
+	color: black;
 }	
+
+#estimate_listing td:first-child{
+	text-align: left;
+}
+#estimate_listing td{
+	border: solid 0px #4f758a;
+	text-align: center;
+}
 
 #estimate_customer_name_header{
 	width: 200px;
@@ -153,7 +163,7 @@ h1.title{
 }
 
 #estimate_listing tfoot td{
-	background-color: #9b9da2;
+	/*background-color: #6185d1;*/
 	width: 100%;
 }
 	

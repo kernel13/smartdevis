@@ -7,6 +7,7 @@ class Company < ActiveRecord::Base
   has_many :employees
   has_many :customers
   has_many :estimates
+  has_many :invoices
   
   accepts_nested_attributes_for :accounts, :allow_destroy => true
   accepts_nested_attributes_for :address, :allow_destroy => true

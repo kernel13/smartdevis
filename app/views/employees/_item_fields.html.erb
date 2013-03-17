@@ -1,0 +1,27 @@
+<table>
+	<% if f.object.id %>
+	<tr type="employee" id="employee_<%= f.object.employee_id %>">
+	<% else %>
+	<tr type="employee">
+	<% end %>
+		<td>
+			<%# f.select :material_id, Material.all.collect {|m| [m.name, m.id] } %>
+			<%= f.label :name %>
+			<%= f.text_field :name, :class => "employee_name" %>
+			<%= f.hidden_field :employee_id, :class => "employee_value input-large" %>		
+		</td>
+		<td>
+   			<%= f.label :price %>
+   			<%= f.text_field :price, :class => "employee_price input-mini" %>
+ 		</td> 		
+ 		<td>
+   			<%= f.label :nb_day %>
+   			<%= f.text_field :nb_day, :class => "employee_nb_jour input-mini" %>
+ 		</td> 
+ 		<td>
+   			<%= f.label :half_day %>
+   			<%= f.check_box :half_day, :class => "employee_half_day" %>
+ 		</td>
+		<td><%= f.link_to_remove t('destroy')  %></td>
+	</tr>
+</table>

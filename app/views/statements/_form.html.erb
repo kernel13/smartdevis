@@ -1,0 +1,116 @@
+<% content_for :pageMenu do %>
+    <div class="btn-group">
+	<%= link_to new_worksite_url({:statement => @resource.id}), :remote => true, :class => "btn btn-inverse" do %>
+		<i class="icon-plus">&nbsp;&nbsp;<%= t('.add_worksite') %></i> 
+	<% end %>
+	</div>
+	<div class="btn-group">
+	<%= link_to resource_url(resource, :format => :pdf), :class => "btn btn-inverse"  do %>
+	    	<i class=" icon-print"></i>
+	 <% end %>
+	</div>
+
+<% end %>
+
+<%= nested_form_for(@resource) do |f| %>
+  <% if @resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@resource.errors.count, "error") %> prohibited this estimate from being saved:</h2>
+
+      <ul>
+      <% @resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :company_id, :value => @company.id, :id => :company_id %>
+
+  <div class="span10">
+	
+	<div class="row">
+		<div class="span6"><h1 class="title"><%= t(".#{ params[:controller].downcase }") %></h1></div>
+		<div class="span4"><h4><%= @resource.created_at.strftime("%A %d %B %Y") %></h4></div>
+	</div>
+	<br />
+	<div class="row">
+		<div class="span10">
+			<% if @company.logo %>
+				<%= image_tag @company.logo, :width => "200px;" %> 
+			<% else %>
+				<h1><%= @company.company_name %></h1>
+			<% end %>
+		</div>			
+	</div>	
+	<div class="row">						
+	  	<div class="span5">
+	  		<address>
+			<%= @company.address.address_line1 %><br />
+	 		<%= @company.address.address_line2 if @company.address.address_line2 %>
+			<%= @company.address.postal_code %>, <%= @company.address.city %><br />
+			<%= @company.address.email %> <br /> <br />
+			</address>
+	
+			<span class="header">Telephone: </span> <%= @company.address.phone %> <br />
+			<span class="header">Fax: </span> <%= @company.address.fax %>	<br />			
+			<span class="header">Siret: </span> <%= @company.siret %> <br /><br />
+			
+			<h3>Référence: <%= @resource.id %></h3>
+		</div>	
+
+		<div class="span5">
+			<fieldset>
+				<legend>
+						<%= t('.customer') %>: <%= f.text_field :customer_name, :id => :customer_name %>
+						<%= link_to new_customer_path, :remote => true do %>
+							<i class="icon-plus-sign" title="Créer un nouveau client"></i>
+						<% end %>								
+				</legend>
+				<%= f.hidden_field :customer_id, :id => :customer_id %>
+				
+				<%= render '/addresses/address', :address => @resource.customer.address  %>
+				
+			</fieldset>
+		</div>		
+	  </div>
+
+	  <div class="row">
+	  	<!-- Worksites -->
+		<div id="worksites" class="span9">
+			
+			
+			<%# f.fields_for :worksites %>
+		 	<p><%# f.link_to_add t('.add_a_worksite'), :worksites %></p>		
+			<%# end %>
+			
+			<%= render @worksites %>
+		</div>
+	  </div>
+
+	  <div class="row">
+
+	  	<div class="span9">
+	    	<%= f.label :totalTF %>	
+	    	<%= f.text_field :totalTF %>
+	  	</div>
+	</div>
+
+	<div class="row">
+	  	<div class="span9">
+	    	<%= f.submit :class => "btn btn-primary" %>
+	  	</div>
+	 </div>
+
+	
+		
+	<% end %>
+
+</div>
+
+<!--
+
+<div id="new_customer_dialog_form">
+		<%# render "/customers/form" %>
+</div>
+-->

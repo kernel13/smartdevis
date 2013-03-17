@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125133015) do
+ActiveRecord::Schema.define(:version => 20130316163535) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -101,6 +101,18 @@ ActiveRecord::Schema.define(:version => 20130125133015) do
     t.string   "customer_name"
   end
 
+  create_table "employee_tasks", :force => true do |t|
+    t.integer  "employee_id"
+    t.integer  "worksite_id"
+    t.decimal  "price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "nb_day"
+    t.boolean  "half_day"
+  end
+
+  add_index "employee_tasks", ["employee_id", "worksite_id"], :name => "index_employee_tasks_on_employee_id_and_worksite_id"
+
   create_table "employees", :force => true do |t|
     t.string   "last_name"
     t.string   "first_name"
@@ -110,18 +122,9 @@ ActiveRecord::Schema.define(:version => 20130125133015) do
     t.integer  "company_id"
   end
 
-  create_table "employees_estimates", :id => false, :force => true do |t|
-    t.integer "estimate_id"
+  create_table "employees_statements", :id => false, :force => true do |t|
+    t.integer "statement_id"
     t.integer "employee_id"
-  end
-
-  create_table "estimates", :force => true do |t|
-    t.decimal  "total"
-    t.integer  "nb_days"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "customer_id"
-    t.integer  "company_id"
   end
 
   create_table "items", :force => true do |t|
@@ -144,6 +147,16 @@ ActiveRecord::Schema.define(:version => 20130125133015) do
 
   add_index "materials", ["category_id"], :name => "index_materials_on_category_id"
 
+  create_table "statements", :force => true do |t|
+    t.decimal  "total"
+    t.integer  "nb_days"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "customer_id"
+    t.integer  "company_id"
+    t.string   "type"
+  end
+
   create_table "worksites", :force => true do |t|
     t.string   "reason"
     t.text     "description"
@@ -151,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20130125133015) do
     t.date     "work_end_on"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "estimate_id"
+    t.integer  "statement_id"
   end
 
 end

@@ -11,11 +11,28 @@ fr:
             update: "Sauvergarder"   
     date:
         formats:
-            default: "%d/%m/%Y"     
+            default: "%m/%d/%Y"     
     time:
         formats:
             default: "%d/%m/%Y - %H:%M" 
             long: "%Y-%m-%d %H:%M:%S"
+    number:
+        currency:
+            format: 
+                format: "%n %u"
+                unit: "€"
+                separator: ","
+                delimiter: " "
+                precision: 2
+                significant: false
+                strip_insignificant_zeros: false
+        percentage:
+            format:
+                delimiter: ""
+                precision: 3
+                significant: true
+                separator: "."
+                strip_insignificant_zeros: false
     activerecord:
         errors:
             models:
@@ -84,7 +101,7 @@ fr:
             employee:
                 last_name: "Nom"
                 first_name: "Prénom"
-                day_price: "Prix à la journée"
+                day_price: "Prix à la journée"                
             customer:
                 last_name: "Nom"
                 first_name: "Prénom"
@@ -96,6 +113,16 @@ fr:
                 name: "Nom"
                 unit_priceTF: "Prix Unitaire HT"
                 category: "Categorie"
+            worksite:
+                reason: "Intitulé"
+                description: "déscription"
+                work_start_on: "Début des travaux"
+                work_end_on: "Fin des travaux"  
+            employee_task:
+                name: 'Nom'    
+                price: "Coût"                              
+                nb_day: "nb jour"
+                half_day: "1/2 j."
     companies:
         form:
             add_an_account: "Ajouter un compte"
@@ -165,3 +192,21 @@ fr:
     estimates:
         form:
             customer: "Client"  
+    statements:
+        form:
+            estimates: "Devis"
+            invoices: "Facture"
+            add_worksite: "Créer un nouveau chantier"   
+        index:
+            estimates: "Devis"
+            invoices: "Factures" 
+            new_estimates: "Nouveau Devis"
+            new_invoices: "Nouvelle Facture"  
+    worksites:
+        new:
+            new_worksite: "Nouvelle prestation"
+            total_cost: "Coût Totâl"
+        form:            
+            add_a_material: "Ajouter un Matériel"
+            add_an_employee: "Ajouter un ouvrier"
+      

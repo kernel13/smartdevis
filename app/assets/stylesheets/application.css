@@ -26,6 +26,11 @@ body{
 	border-radius: 5px;
 }
 
+.page_title{
+	
+	background-image: url('background.png');
+	padding: 30px 20px;
+}
 
 #content{
 	min-height: 300px;
@@ -62,7 +67,7 @@ span.content
 
 #menu{
 	position: absolute;
-	top: 30px;
+	margin: -40px 0 0 -350px;
 	width: 700px;	
 	height: 400px;	
 

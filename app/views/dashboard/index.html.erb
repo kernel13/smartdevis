@@ -47,7 +47,7 @@
 						</tr>
 					</thead>
 					<tbody>
-				<% @latest_estmates.each do |estimate| %>
+				<% @latest_estimates.each do |estimate| %>
 					<tr>
 					<td><%= estimate.customer_name %></td>
 					<td><%= estimate.created_at.strftime("%d %b %y %H:%M") %></td>
@@ -73,7 +73,13 @@
 						</tr>
 					</thead>
 					<tbody>
-	
+						<% @latest_invoices.each do |invoice| %>
+						<tr>
+						<td><%= invoice.customer_name %></td>
+						<td><%= invoice.created_at.strftime("%d %b %y %H:%M") %></td>
+						<td><%= invoice.total %></td>
+						</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</span>

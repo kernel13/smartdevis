@@ -1,3 +1,31 @@
-$("#dialog-add-worksite").empty();
-$("#dialog-add-worksite").append("<%= j render('form') %>")
-$("#dialog-add-worksite").dialog( "open" );
+
+$("#editWorksiteModal").remove();
+$(document.body).append("<%=j render('edit') %>")
+$("#editWorksiteModal").modal();
+
+//var materials = new Array();
+
+//
+//			Worksite
+//
+try
+{
+var work = <%=raw @worksite.to_json(:include => [
+							{:items => { :include => :material }}, 
+							{ :employee_tasks => { :include => :employee } }] ) %>;
+var w = new Worksite(work);
+}
+catch(err)
+{
+	alert(err);
+}
+
+//
+// 			Material 
+//
+//var m = new Material();
+
+//
+//			Employee
+//
+//var e = new Employee();

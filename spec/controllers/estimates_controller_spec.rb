@@ -35,7 +35,7 @@ describe EstimatesController do
   end
 
   describe "GET index" do
-    it "assigns all estimates as @estimates" do
+    it "assigns all estimates as @resources" do
       estimate = Estimate.create! valid_attributes
       get :index, {}, valid_session
       assigns(:estimates).should eq([estimate])
@@ -43,7 +43,7 @@ describe EstimatesController do
   end
 
   describe "GET show" do
-    it "assigns the requested estimate as @estimate" do
+    it "assigns the requested estimate as @resource" do
       estimate = Estimate.create! valid_attributes
       get :show, {:id => estimate.to_param}, valid_session
       assigns(:estimate).should eq(estimate)
@@ -51,14 +51,14 @@ describe EstimatesController do
   end
 
   describe "GET new" do
-    it "assigns a new estimate as @estimate" do
+    it "assigns a new estimate as @resource" do
       get :new, {}, valid_session
       assigns(:estimate).should be_a_new(Estimate)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested estimate as @estimate" do
+    it "assigns the requested estimate as @resource" do
       estimate = Estimate.create! valid_attributes
       get :edit, {:id => estimate.to_param}, valid_session
       assigns(:estimate).should eq(estimate)
@@ -73,7 +73,7 @@ describe EstimatesController do
         }.to change(Estimate, :count).by(1)
       end
 
-      it "assigns a newly created estimate as @estimate" do
+      it "assigns a newly created estimate as @resource" do
         post :create, {:estimate => valid_attributes}, valid_session
         assigns(:estimate).should be_a(Estimate)
         assigns(:estimate).should be_persisted
@@ -86,7 +86,7 @@ describe EstimatesController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved estimate as @estimate" do
+      it "assigns a newly created but unsaved estimate as @resource" do
         # Trigger the behavior that occurs when invalid params are submitted
         Estimate.any_instance.stub(:save).and_return(false)
         post :create, {:estimate => {}}, valid_session
@@ -114,7 +114,7 @@ describe EstimatesController do
         put :update, {:id => estimate.to_param, :estimate => {'these' => 'params'}}, valid_session
       end
 
-      it "assigns the requested estimate as @estimate" do
+      it "assigns the requested estimate as @resource" do
         estimate = Estimate.create! valid_attributes
         put :update, {:id => estimate.to_param, :estimate => valid_attributes}, valid_session
         assigns(:estimate).should eq(estimate)
@@ -128,7 +128,7 @@ describe EstimatesController do
     end
 
     describe "with invalid params" do
-      it "assigns the estimate as @estimate" do
+      it "assigns the estimate as @resource" do
         estimate = Estimate.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Estimate.any_instance.stub(:save).and_return(false)

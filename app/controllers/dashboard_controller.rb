@@ -3,7 +3,8 @@ class DashboardController < ApplicationController
   
   def index
       @company = current_account.company
-      @latest_estmates = @company.estimates.order("updated_at desc").take(5)
+      @latest_estimates = @company.estimates.order("updated_at desc").take(5)
+      @latest_invoices = @company.invoices.order("updated_at desc").take(5)
       @latest_customers = @company.customers.order("created_at desc").take(5)
   end
 end

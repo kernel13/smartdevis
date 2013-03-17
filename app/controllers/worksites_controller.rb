@@ -3,7 +3,7 @@ class WorksitesController < InheritedResources::Base
    
    def new
         @worksite = Worksite.new
-        @worksite.estimate_id = params[:estimate] if params[:estimate]
+        @worksite.statement_id = params[:statement] if params[:statement]
         
         respond_to do |format|
             format.js
@@ -15,11 +15,13 @@ class WorksitesController < InheritedResources::Base
        
        respond_to do |format|
          if @worksite.save
-           format.html { redirect_to estimates_url, notice: 'worksite was successfully created.' }
+           format.html { redirect_to worksites_url, notice: 'worksite was successfully created.' }
            format.json { render json: @worksite, status: :created, location: @worksite }
+           format.js
          else
            format.html { render action: "new" }
            format.json { render json: @worksite.errors, status: :unprocessable_entity }
+           format.js
          end
        end  
    
@@ -27,9 +29,29 @@ class WorksitesController < InheritedResources::Base
    
    def edit
      @worksite = Worksite.find(params[:id])
-     
+    
      respond_to do |format|
-        format.js
+        format.html 
+        format.json { render json: @worksite }
+        format.js 
+     end
+   end
+
+   # PUT /worksite/1
+   # PUT /worksite/1.json
+   def update
+     @worksite = Worksite.find(params[:id])
+
+     respond_to do |format|
+       if @worksite.update_attributes(params[:worksite])
+         format.html { redirect_to @worksite, notice: 'worksite was successfully updated.' }
+         format.json { head :no_content }
+         format.js
+       else
+         format.html { render action: "edit" }
+         format.json { render json: @worksite.errors, status: :unprocessable_entity }
+         format.js
+       end
      end
    end
    

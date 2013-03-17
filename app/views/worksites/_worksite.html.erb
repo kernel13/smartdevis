@@ -9,6 +9,7 @@
 	<hr />
 	<p style="text-align: left;"><%= worksite.description %></p>
 
+    <hr />
 	<table  class="features-table">
 		<thead>
 			<tr>
@@ -28,10 +29,10 @@
 				<%= material.quantity %>
 			</td>
 			<td>
-				<%= material.totalTF %>
+				<%= number_to_currency(material.totalTF) %>
 			</td>
 			<td>
-				<%= material.tva %>
+				<%= number_to_percentage(material.tva) %>
 			</td>
 		</tr>
 	<% end %>
@@ -47,4 +48,29 @@
 	</tfoot>
 
 	</table>
+
+	<hr />
+	<table class="table">
+		<thead>
+			<tr>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Cost</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<% worksite.employee_tasks.each do |employee| %>
+			<tr id="employee_<%= employee.id %>">
+				<%= hidden_field_tag "employee_#{employee.id}", employee.employee.id %>
+	    		<td><%= employee.employee.last_name %></td>
+	    		<td><%= employee.employee.first_name %></td>
+	    		<td><%= employee.employee.day_price %></td>
+	    		<td><%= link_to t('destroy'), employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
 </div>
+

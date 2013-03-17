@@ -1,14 +1,10 @@
-<address>
-	<%= address.address.address_line1 %>
+
+<address>					
+	<%= address.address_line1 %><br />
+	<%= address.address_line2 %><br />
+	<%= address.postal_code %></span>,<span><%= address.city %>
 	<br />
-	<%= address.address.address_line2 %>
-	<br />
-	<%= address.address.city %>,
-	<%= address.address.postal_code %>
-	<br />
-	<b><%= t('.email') %> </b>
-	<%= address.address.email %>
-	<br />
-	<b><%= t('.phone') %> </b>
-	<%= address.address.phone %>	
+	<b><%= t('.phone') %></b><span id="phone"><%= address.phone %></span> <br />
+	<b>Fax: </b> <span id="fax"><%= address.fax %></span>	<br />
+	<b><%= t('.email') %></b> <span id="email"><%= address.email %></span> <br />
 </address>
