@@ -8,7 +8,7 @@ class EstimatesController < StatementsController
     index!
   end
   
-    def show
+  def show
     @resource = Estimate.find(params[:id])
     
     respond_to do |format|
