@@ -520,7 +520,7 @@ Worksite = function(objWorksite) {
 
 	this.RemoveMaterial = function(id){
 		delete this.__materials[id];
-		that.UpdateTotal();
+		this.UpdateTotal();
 	}	
 
 	this.CreateEmployee = function(id){
@@ -529,7 +529,7 @@ Worksite = function(objWorksite) {
 
 	this.RemoveEmployee = function(id){
 		delete this.__employees[id];
-		that.UpdateTotal();
+		this.UpdateTotal();
 	}
 
 	this.UpdateTotal = function () {
